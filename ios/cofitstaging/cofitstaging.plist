@@ -10,6 +10,12 @@
 	<string>Cofit Staging</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>AppsonairAppId</key>
+	<string>041b4013-4f55-4a9e-8a79-fd66f9355d7c</string>
+	<key>CodePushDeploymentKey</key>
+  <string>u2dhM9r4j14KAQH705cNCxgaHKtFfmFG8PB</string>
+  <key>CodePushServerURL</key>
+  <string>https://codepush.appsonair.com</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

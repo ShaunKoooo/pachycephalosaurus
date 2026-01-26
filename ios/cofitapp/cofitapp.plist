@@ -10,6 +10,12 @@
 	<string>Cofit 你的專屬營養師</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>AppsonairAppId</key>
+	<string>ff853eae-ce56-4e65-96fc-38d50f19c203</string>
+	<key>CodePushDeploymentKey</key>
+  <string>AzHNwj34sXaQrs-VXExnjmFPYjrgfmFG8PB</string>
+  <key>CodePushServerURL</key>
+  <string>https://codepush.appsonair.com</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
