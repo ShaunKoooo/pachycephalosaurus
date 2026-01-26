@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">Cofit</string>
+  <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
+  <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
+  <string moduleConfig="true" name="CodePushDeploymentKey">9nrmMTPWAHMPAJPPPbpx2L9WJcasfmFG8PB</string>
+  <string moduleConfig="true" name="CodePushServerUrl">https://codepush.appsonair.com</string>
+</resources>
