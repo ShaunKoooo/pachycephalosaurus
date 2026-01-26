@@ -1,0 +1,45 @@
+{
+  "title": "Notifications",
+  "tabs": {
+    "all": "All",
+    "unread": "Unread",
+    "mentions": "Mentions"
+  },
+  "empty": "No notifications yet",
+  "markAllRead": "Mark all as read",
+  "settings": "Notification Settings",
+  "types": {
+    "workout": "Workout Reminder",
+    "meal": "Meal Reminder",
+    "water": "Water Reminder",
+    "message": "New Message",
+    "booking": "Booking Update",
+    "achievement": "Achievement Unlocked",
+    "social": "Social Activity",
+    "system": "System"
+  },
+  "settings_detail": {
+    "title": "Notification Preferences",
+    "pushNotifications": "Push Notifications",
+    "emailNotifications": "Email Notifications",
+    "sms": "SMS Notifications",
+    "workoutReminders": "Workout Reminders",
+    "mealReminders": "Meal Reminders",
+    "waterReminders": "Water Reminders",
+    "messages": "Messages",
+    "bookings": "Booking Updates",
+    "achievements": "Achievements",
+    "socialActivity": "Social Activity",
+    "promotions": "Promotions & Updates",
+    "quietHours": "Quiet Hours",
+    "quietHoursFrom": "From",
+    "quietHoursTo": "To",
+    "quietHoursDescription": "Mute notifications during these hours"
+  },
+  "actions": {
+    "view": "View",
+    "dismiss": "Dismiss",
+    "accept": "Accept",
+    "decline": "Decline"
+  }
+}

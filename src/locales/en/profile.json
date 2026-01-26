@@ -1,0 +1,98 @@
+{
+  "title": "Profile",
+  "menu": {
+    "editProfile": "Edit Profile",
+    "settings": "Settings",
+    "goals": "Goals",
+    "measurements": "Measurements",
+    "achievements": "Achievements",
+    "subscription": "Subscription",
+    "support": "Help & Support",
+    "about": "About",
+    "logout": "Logout"
+  },
+  "editProfile": {
+    "title": "Edit Profile",
+    "photo": "Profile Photo",
+    "changePhoto": "Change Photo",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself...",
+    "save": "Save Changes"
+  },
+  "settings": {
+    "title": "Settings",
+    "account": "Account",
+    "preferences": "Preferences",
+    "privacy": "Privacy",
+    "notifications": "Notifications",
+    "language": "Language",
+    "units": "Units",
+    "metric": "Metric (kg, cm)",
+    "imperial": "Imperial (lb, in)",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "auto": "Auto",
+    "changePassword": "Change Password",
+    "deleteAccount": "Delete Account",
+    "deleteAccountConfirm": "Are you sure? This action cannot be undone."
+  },
+  "goals": {
+    "title": "Goals",
+    "weightGoal": "Weight Goal",
+    "targetWeight": "Target Weight",
+    "targetDate": "Target Date",
+    "calorieGoal": "Daily Calorie Goal",
+    "proteinGoal": "Protein Goal",
+    "carbsGoal": "Carbs Goal",
+    "fatGoal": "Fat Goal",
+    "stepGoal": "Daily Step Goal",
+    "waterGoal": "Daily Water Goal",
+    "workoutGoal": "Weekly Workout Goal",
+    "save": "Save Goals"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "unlocked": "Unlocked",
+    "locked": "Locked",
+    "progress": "Progress",
+    "badges": "Badges",
+    "streaks": "Streaks",
+    "milestones": "Milestones"
+  },
+  "subscription": {
+    "title": "Subscription",
+    "currentPlan": "Current Plan",
+    "free": "Free",
+    "premium": "Premium",
+    "pro": "Pro",
+    "features": "Features",
+    "upgradeToPremium": "Upgrade to Premium",
+    "managePlan": "Manage Plan",
+    "billingHistory": "Billing History",
+    "nextBilling": "Next billing date"
+  },
+  "support": {
+    "title": "Help & Support",
+    "faq": "FAQ",
+    "contactUs": "Contact Us",
+    "reportBug": "Report a Bug",
+    "requestFeature": "Request a Feature",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  },
+  "stats": {
+    "workouts": "Workouts",
+    "meals": "Meals Logged",
+    "streak": "Day Streak",
+    "joined": "Joined {{date}}"
+  }
+}

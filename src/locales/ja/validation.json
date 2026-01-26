@@ -1,0 +1,57 @@
+{
+  "field": {
+    "required": "{{field}} is required",
+    "invalid": "Invalid {{field}}",
+    "tooShort": "{{field}} must be at least {{min}} characters",
+    "tooLong": "{{field}} must be no more than {{max}} characters",
+    "notMatch": "{{field}} does not match"
+  },
+  "email": {
+    "required": "Email is required",
+    "invalid": "Please enter a valid email address",
+    "exists": "This email is already registered"
+  },
+  "password": {
+    "required": "Password is required",
+    "tooShort": "Password must be at least {{min}} characters",
+    "tooWeak": "Password is too weak",
+    "notMatch": "Passwords do not match",
+    "requirements": "Password must contain at least:",
+    "uppercase": "One uppercase letter",
+    "lowercase": "One lowercase letter",
+    "number": "One number",
+    "special": "One special character"
+  },
+  "phone": {
+    "required": "Phone number is required",
+    "invalid": "Please enter a valid phone number"
+  },
+  "name": {
+    "required": "Name is required",
+    "tooShort": "Name must be at least {{min}} characters",
+    "invalid": "Please enter a valid name"
+  },
+  "age": {
+    "required": "Age is required",
+    "tooYoung": "You must be at least {{min}} years old",
+    "invalid": "Please enter a valid age"
+  },
+  "weight": {
+    "required": "Weight is required",
+    "tooLow": "Weight must be at least {{min}} {{unit}}",
+    "tooHigh": "Weight cannot exceed {{max}} {{unit}}",
+    "invalid": "Please enter a valid weight"
+  },
+  "height": {
+    "required": "Height is required",
+    "tooLow": "Height must be at least {{min}} {{unit}}",
+    "tooHigh": "Height cannot exceed {{max}} {{unit}}",
+    "invalid": "Please enter a valid height"
+  },
+  "date": {
+    "required": "Date is required",
+    "invalid": "Please enter a valid date",
+    "future": "Date cannot be in the future",
+    "past": "Date cannot be in the past"
+  }
+}

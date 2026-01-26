@@ -1,0 +1,44 @@
+{
+  "title": "Home",
+  "greeting": "Hello, {{name}}!",
+  "greetingMorning": "Good morning, {{name}}!",
+  "greetingAfternoon": "Good afternoon, {{name}}!",
+  "greetingEvening": "Good evening, {{name}}!",
+  "dashboard": {
+    "todayProgress": "Today's Progress",
+    "weeklyProgress": "Weekly Progress",
+    "calories": "Calories",
+    "caloriesGoal": "{{current}} / {{goal}} cal",
+    "steps": "Steps",
+    "stepsGoal": "{{current}} / {{goal}} steps",
+    "water": "Water",
+    "waterGoal": "{{current}} / {{goal}} ml",
+    "workout": "Workout",
+    "workoutTime": "{{time}} min"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "logMeal": "Log Meal",
+    "startWorkout": "Start Workout",
+    "addWater": "Add Water",
+    "logWeight": "Log Weight"
+  },
+  "recentActivity": {
+    "title": "Recent Activity",
+    "noActivity": "No recent activity",
+    "viewAll": "View All"
+  },
+  "insights": {
+    "title": "Insights",
+    "streakDays": "{{count}} day streak",
+    "streakDays_plural": "{{count}} days streak",
+    "caloriesBurned": "Calories burned this week",
+    "avgWorkout": "Average workout time"
+  },
+  "challenges": {
+    "title": "Challenges",
+    "active": "Active Challenges",
+    "completed": "Completed",
+    "join": "Join Challenge"
+  }
+}

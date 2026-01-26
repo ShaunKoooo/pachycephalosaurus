@@ -1,0 +1,59 @@
+{
+  "title": "Experts",
+  "search": {
+    "placeholder": "Search experts...",
+    "filter": {
+      "all": "All",
+      "nutritionist": "Nutritionist",
+      "trainer": "Trainer",
+      "therapist": "Therapist",
+      "coach": "Coach"
+    },
+    "sort": {
+      "rating": "Rating",
+      "experience": "Experience",
+      "price": "Price"
+    }
+  },
+  "list": {
+    "viewProfile": "View Profile",
+    "book": "Book Session",
+    "rating": "{{rating}} ({{count}} review)",
+    "rating_plural": "{{rating}} ({{count}} reviews)",
+    "yearsExp": "{{years}} years exp",
+    "priceFrom": "From ${{price}}/session",
+    "available": "Available",
+    "busy": "Busy",
+    "offline": "Offline"
+  },
+  "detail": {
+    "about": "About",
+    "specialties": "Specialties",
+    "experience": "{{years}} years experience",
+    "education": "Education",
+    "certifications": "Certifications",
+    "availability": "Availability",
+    "bookSession": "Book a Session",
+    "sendMessage": "Send Message",
+    "reviews": "Reviews",
+    "allReviews": "All Reviews",
+    "writeReview": "Write a Review"
+  },
+  "booking": {
+    "title": "Book Session",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "sessionType": "Session Type",
+    "online": "Online",
+    "inPerson": "In Person",
+    "duration": "Duration",
+    "minutes": "{{count}} min",
+    "price": "Price",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Any specific goals or concerns?",
+    "confirm": "Confirm Booking",
+    "success": "Session booked successfully!",
+    "upcoming": "Upcoming Sessions",
+    "past": "Past Sessions"
+  }
+}

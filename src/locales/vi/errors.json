@@ -1,0 +1,43 @@
+{
+  "network": {
+    "noConnection": "No internet connection",
+    "timeout": "Request timeout",
+    "serverError": "Server error. Please try again later",
+    "unknownError": "An unknown error occurred"
+  },
+  "auth": {
+    "invalidCredentials": "Invalid email or password",
+    "sessionExpired": "Your session has expired. Please log in again",
+    "unauthorized": "You don't have permission to access this",
+    "accountDisabled": "Your account has been disabled"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Invalid phone number",
+    "invalidDate": "Invalid date",
+    "minLength": "Must be at least {{count}} characters",
+    "maxLength": "Must be no more than {{count}} characters",
+    "minValue": "Must be at least {{value}}",
+    "maxValue": "Must be no more than {{value}}",
+    "invalidFormat": "Invalid format"
+  },
+  "file": {
+    "uploadFailed": "File upload failed",
+    "fileTooLarge": "File is too large (max {{size}}MB)",
+    "invalidFileType": "Invalid file type",
+    "tooManyFiles": "Too many files (max {{count}})"
+  },
+  "payment": {
+    "failed": "Payment failed",
+    "invalidCard": "Invalid card details",
+    "insufficientFunds": "Insufficient funds",
+    "declined": "Payment declined"
+  },
+  "general": {
+    "somethingWentWrong": "Something went wrong",
+    "tryAgain": "Please try again",
+    "notFound": "Not found",
+    "unavailable": "This feature is currently unavailable"
+  }
+}
