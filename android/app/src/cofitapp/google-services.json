@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "570906617553",
+    "firebase_url": "https://me-cofit-ironman.firebaseio.com",
+    "project_id": "me-cofit-ironman",
+    "storage_bucket": "me-cofit-ironman.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570906617553:android:bf4f5e6f44d5150a",
+        "android_client_info": {
+          "package_name": "me.cofit.ironman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570906617553-4aqjfvdmlsv3mc29fetir97tk8be3ncq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbPi9CXbNXZOhat4wXFQopn47wl_Hc7Fg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570906617553-4aqjfvdmlsv3mc29fetir97tk8be3ncq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "570906617553-08lfuobgjrpk519q4e9lrj2p7liomrsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cofit.me",
+                "app_store_id": "1062498342"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

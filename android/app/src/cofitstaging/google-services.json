@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "682201312554",
+    "project_id": "cofitstaging",
+    "storage_bucket": "cofitstaging.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682201312554:android:909276578d1a39c259c253",
+        "android_client_info": {
+          "package_name": "me.cofit.cofit_staging"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8HaBP2nKaWCFikf1BLho-qA4qJL-ij_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

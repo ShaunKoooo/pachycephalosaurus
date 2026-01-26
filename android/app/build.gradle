@@ -1,6 +1,17 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply from: "../../node_modules/@code-push-next/react-native-code-push/android/codepush.gradle"
+
+// Load env file based on flavor
+project.ext.envConfigFiles = [
+    cofitappDebug: ".env.cofitapp",
+    cofitappRelease: ".env.cofitapp",
+    cofitstagingDebug: ".env.cofitstaging",
+    cofitstagingRelease: ".env.cofitstaging",
+    cofitproDebug: ".env.cofitpro",
+    cofitproRelease: ".env.cofitpro",
+]
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -85,22 +96,65 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+        cofitapp {
+            storeFile file("../../cofitapp.jks")
+            storePassword "cofit666"
+            keyAlias "ironman"
+            keyPassword "cofit666"
+        }
+
+        cofitstaging {
+            storeFile file("../../cofitstaging.jks")
+            storePassword "cofitstaging"
+            keyAlias "cofitstaging"
+            keyPassword "cofitstaging"
+        }
+
+        cofitpro {
+            storeFile file("../../cofitpro.jks")
+            storePassword "cofit666"
+            keyAlias "captain"
+            keyPassword "cofit666"
         }
     }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        cofitapp {
+            dimension "app"
+            applicationId "me.cofit.ironman"
+            resValue "string", "app_name", "Cofit 你的專屬營養師"
+            // CofitApp flavor 使用 cofitapp 簽名
+            signingConfig signingConfigs.cofitapp
+        }
+
+        cofitstaging {
+            dimension "app"
+            applicationId "me.cofit.cofit_staging"
+            resValue "string", "app_name", "Cofit Staging"
+            // CofitStaging flavor 使用 cofitstaging 簽名
+            signingConfig signingConfigs.cofitstaging
+        }
+
+        cofitpro {
+            dimension "app"
+            applicationId "me.cofit.CofitPro"
+            resValue "string", "app_name", "CofitPro - 營養師專用版"
+            // CofitPro flavor 使用 cofitpro 簽名
+            signingConfig signingConfigs.cofitpro
+        }
+    }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            // Release builds will use the signing config defined in each productFlavor
+            // (cofitapp, cofitstaging, cofitpro)
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
