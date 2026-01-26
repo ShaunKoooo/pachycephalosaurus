@@ -7,11 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C80B921A6F3F58F76C31292 /* libPods-Pachycephalosaurus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Pachycephalosaurus.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2FF67CA764269ED6414CA9ED /* libPods-cofitapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A30728C9BC4348AFE19055 /* libPods-cofitapp.a */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		82C6FE45C9E18CB88A0742D7 /* libPods-cofitstaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B06ECF8AAE1E9C132E65D38D /* libPods-cofitstaging.a */; };
 		96D5359E50F82AFA1F49FAB0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		A172820BB1AE65CA382F1C4D /* libPods-cofitpro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67EFA58B42DB94AC1AF9AC69 /* libPods-cofitpro.a */; };
+		E49702892F27241700F893DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
+		E497028E2F27241700F893DF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		E497028F2F27241700F893DF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		E497029B2F27241F00F893DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
+		E49702A02F27241F00F893DF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		E49702A12F27241F00F893DF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		E49702B52F27519300F893DF /* CofitProLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49702B42F27519300F893DF /* CofitProLaunchScreen.storyboard */; };
+		E49702B72F2751A100F893DF /* CofitStagingLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49702B62F2751A100F893DF /* CofitStagingLaunchScreen.storyboard */; };
+		E49702B92F27533500F893DF /* CofitappLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49702B82F27533500F893DF /* CofitappLaunchScreen.storyboard */; };
+		E49702BB2F27591800F893DF /* cofitapp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E49702BA2F27591800F893DF /* cofitapp.xcassets */; };
+		E49702BD2F27592600F893DF /* cofitpro.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E49702BC2F27592600F893DF /* cofitpro.xcassets */; };
+		E49702BF2F27593100F893DF /* cofitstaging.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E49702BE2F27593100F893DF /* cofitstaging.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,12 +32,30 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Pachycephalosaurus/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Pachycephalosaurus/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Pachycephalosaurus/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		14A30728C9BC4348AFE19055 /* libPods-cofitapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cofitapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AFCCFFE64737821437089E4 /* Pods-cofitstaging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitstaging.release.xcconfig"; path = "Target Support Files/Pods-cofitstaging/Pods-cofitstaging.release.xcconfig"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-Pachycephalosaurus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pachycephalosaurus.debug.xcconfig"; path = "Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Pachycephalosaurus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pachycephalosaurus.release.xcconfig"; path = "Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus.release.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-Pachycephalosaurus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pachycephalosaurus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		59C3A119416AFC36F43BD934 /* Pods-cofitapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitapp.release.xcconfig"; path = "Target Support Files/Pods-cofitapp/Pods-cofitapp.release.xcconfig"; sourceTree = "<group>"; };
+		67EFA58B42DB94AC1AF9AC69 /* libPods-cofitpro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cofitpro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Pachycephalosaurus/AppDelegate.swift; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Pachycephalosaurus/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B06ECF8AAE1E9C132E65D38D /* libPods-cofitstaging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cofitstaging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA8DC0DECAA9C3CC113FE979 /* Pods-cofitpro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitpro.release.xcconfig"; path = "Target Support Files/Pods-cofitpro/Pods-cofitpro.release.xcconfig"; sourceTree = "<group>"; };
+		C106974A5B628CA9A4E787AC /* Pods-cofitstaging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitstaging.debug.xcconfig"; path = "Target Support Files/Pods-cofitstaging/Pods-cofitstaging.debug.xcconfig"; sourceTree = "<group>"; };
+		E49702962F27241700F893DF /* cofitstaging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cofitstaging.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E49702972F27241700F893DF /* cofitapp.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cofitapp.plist; path = /Users/shaun_ko/Pachycephalosaurus/ios/cofitapp/cofitapp.plist; sourceTree = "<absolute>"; };
+		E49702A82F27241F00F893DF /* cofitpro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cofitpro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E49702A92F27241F00F893DF /* cofitstaging.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cofitstaging.plist; path = /Users/shaun_ko/Pachycephalosaurus/ios/cofitstaging/cofitstaging.plist; sourceTree = "<absolute>"; };
+		E49702AE2F274A7800F893DF /* cofitpro.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cofitpro.plist; path = /Users/shaun_ko/Pachycephalosaurus/ios/cofitpro/cofitpro.plist; sourceTree = "<absolute>"; };
+		E49702B42F27519300F893DF /* CofitProLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CofitProLaunchScreen.storyboard; sourceTree = "<group>"; };
+		E49702B62F2751A100F893DF /* CofitStagingLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CofitStagingLaunchScreen.storyboard; sourceTree = "<group>"; };
+		E49702B82F27533500F893DF /* CofitappLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CofitappLaunchScreen.storyboard; sourceTree = "<group>"; };
+		E49702BA2F27591800F893DF /* cofitapp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = cofitapp.xcassets; sourceTree = "<group>"; };
+		E49702BC2F27592600F893DF /* cofitpro.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = cofitpro.xcassets; sourceTree = "<group>"; };
+		E49702BE2F27593100F893DF /* cofitstaging.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = cofitstaging.xcassets; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EE1B8EBC6557FBF1C4BECC33 /* Pods-cofitpro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitpro.debug.xcconfig"; path = "Target Support Files/Pods-cofitpro/Pods-cofitpro.debug.xcconfig"; sourceTree = "<group>"; };
+		F9E3CE1C908944E5862E5DB2 /* Pods-cofitapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitapp.debug.xcconfig"; path = "Target Support Files/Pods-cofitapp/Pods-cofitapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +63,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-Pachycephalosaurus.a in Frameworks */,
+				2FF67CA764269ED6414CA9ED /* libPods-cofitapp.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E497028A2F27241700F893DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82C6FE45C9E18CB88A0742D7 /* libPods-cofitstaging.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E497029C2F27241F00F893DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A172820BB1AE65CA382F1C4D /* libPods-cofitpro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +92,6 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
 			name = Pachycephalosaurus;
@@ -55,7 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-Pachycephalosaurus.a */,
+				14A30728C9BC4348AFE19055 /* libPods-cofitapp.a */,
+				67EFA58B42DB94AC1AF9AC69 /* libPods-cofitpro.a */,
+				B06ECF8AAE1E9C132E65D38D /* libPods-cofitstaging.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -70,6 +118,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				E49702AD2F274A5000F893DF /* cofitapp */,
+				E49702AC2F2739B900F893DF /* cofitpro */,
+				E49702AB2F2739B100F893DF /* cofitstaging */,
 				13B07FAE1A68108700A75B9A /* Pachycephalosaurus */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -85,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* Pachycephalosaurus.app */,
+				E49702962F27241700F893DF /* cofitstaging.app */,
+				E49702A82F27241F00F893DF /* cofitpro.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,16 +147,52 @@
 			children = (
 				3B4392A12AC88292D35C810B /* Pods-Pachycephalosaurus.debug.xcconfig */,
 				5709B34CF0A7D63546082F79 /* Pods-Pachycephalosaurus.release.xcconfig */,
+				F9E3CE1C908944E5862E5DB2 /* Pods-cofitapp.debug.xcconfig */,
+				59C3A119416AFC36F43BD934 /* Pods-cofitapp.release.xcconfig */,
+				EE1B8EBC6557FBF1C4BECC33 /* Pods-cofitpro.debug.xcconfig */,
+				BA8DC0DECAA9C3CC113FE979 /* Pods-cofitpro.release.xcconfig */,
+				C106974A5B628CA9A4E787AC /* Pods-cofitstaging.debug.xcconfig */,
+				3AFCCFFE64737821437089E4 /* Pods-cofitstaging.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E49702AB2F2739B100F893DF /* cofitstaging */ = {
+			isa = PBXGroup;
+			children = (
+				E49702BE2F27593100F893DF /* cofitstaging.xcassets */,
+				E49702A92F27241F00F893DF /* cofitstaging.plist */,
+				E49702B62F2751A100F893DF /* CofitStagingLaunchScreen.storyboard */,
+			);
+			path = cofitstaging;
+			sourceTree = "<group>";
+		};
+		E49702AC2F2739B900F893DF /* cofitpro */ = {
+			isa = PBXGroup;
+			children = (
+				E49702BC2F27592600F893DF /* cofitpro.xcassets */,
+				E49702AE2F274A7800F893DF /* cofitpro.plist */,
+				E49702B42F27519300F893DF /* CofitProLaunchScreen.storyboard */,
+			);
+			path = cofitpro;
+			sourceTree = "<group>";
+		};
+		E49702AD2F274A5000F893DF /* cofitapp */ = {
+			isa = PBXGroup;
+			children = (
+				E49702BA2F27591800F893DF /* cofitapp.xcassets */,
+				E49702B82F27533500F893DF /* CofitappLaunchScreen.storyboard */,
+				E49702972F27241700F893DF /* cofitapp.plist */,
+			);
+			path = cofitapp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* Pachycephalosaurus */ = {
+		13B07F861A680F5B00A75B9A /* cofitapp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Pachycephalosaurus" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "cofitapp" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -117,9 +206,51 @@
 			);
 			dependencies = (
 			);
-			name = Pachycephalosaurus;
+			name = cofitapp;
 			productName = Pachycephalosaurus;
 			productReference = 13B07F961A680F5B00A75B9A /* Pachycephalosaurus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E49702862F27241700F893DF /* cofitstaging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E49702932F27241700F893DF /* Build configuration list for PBXNativeTarget "cofitstaging" */;
+			buildPhases = (
+				E49702872F27241700F893DF /* [CP] Check Pods Manifest.lock */,
+				E49702882F27241700F893DF /* Sources */,
+				E497028A2F27241700F893DF /* Frameworks */,
+				E497028C2F27241700F893DF /* Resources */,
+				E49702902F27241700F893DF /* Bundle React Native code and images */,
+				E49702912F27241700F893DF /* [CP] Embed Pods Frameworks */,
+				E49702922F27241700F893DF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cofitstaging;
+			productName = Pachycephalosaurus;
+			productReference = E49702962F27241700F893DF /* cofitstaging.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E49702982F27241F00F893DF /* cofitpro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E49702A52F27241F00F893DF /* Build configuration list for PBXNativeTarget "cofitpro" */;
+			buildPhases = (
+				E49702992F27241F00F893DF /* [CP] Check Pods Manifest.lock */,
+				E497029A2F27241F00F893DF /* Sources */,
+				E497029C2F27241F00F893DF /* Frameworks */,
+				E497029E2F27241F00F893DF /* Resources */,
+				E49702A22F27241F00F893DF /* Bundle React Native code and images */,
+				E49702A32F27241F00F893DF /* [CP] Embed Pods Frameworks */,
+				E49702A42F27241F00F893DF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cofitpro;
+			productName = Pachycephalosaurus;
+			productReference = E49702A82F27241F00F893DF /* cofitpro.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -148,7 +279,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Pachycephalosaurus */,
+				13B07F861A680F5B00A75B9A /* cofitapp */,
+				E49702862F27241700F893DF /* cofitstaging */,
+				E49702982F27241F00F893DF /* cofitpro */,
 			);
 		};
 /* End PBXProject section */
@@ -158,9 +291,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				E49702B92F27533500F893DF /* CofitappLaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				96D5359E50F82AFA1F49FAB0 /* PrivacyInfo.xcprivacy in Resources */,
+				E49702BB2F27591800F893DF /* cofitapp.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E497028C2F27241700F893DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E49702B72F2751A100F893DF /* CofitStagingLaunchScreen.storyboard in Resources */,
+				E497028E2F27241700F893DF /* Images.xcassets in Resources */,
+				E497028F2F27241700F893DF /* PrivacyInfo.xcprivacy in Resources */,
+				E49702BF2F27593100F893DF /* cofitstaging.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E497029E2F27241F00F893DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E49702B52F27519300F893DF /* CofitProLaunchScreen.storyboard in Resources */,
+				E49702A02F27241F00F893DF /* Images.xcassets in Resources */,
+				E49702A12F27241F00F893DF /* PrivacyInfo.xcprivacy in Resources */,
+				E49702BD2F27592600F893DF /* cofitpro.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,15 +345,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cofitapp/Pods-cofitapp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cofitapp/Pods-cofitapp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cofitapp/Pods-cofitapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
@@ -215,7 +371,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Pachycephalosaurus-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-cofitapp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -228,15 +384,159 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cofitapp/Pods-cofitapp-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-cofitapp/Pods-cofitapp-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cofitapp/Pods-cofitapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49702872F27241700F893DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cofitstaging-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49702902F27241700F893DF /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
+		};
+		E49702912F27241700F893DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitstaging/Pods-cofitstaging-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitstaging/Pods-cofitstaging-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cofitstaging/Pods-cofitstaging-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49702922F27241700F893DF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitstaging/Pods-cofitstaging-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitstaging/Pods-cofitstaging-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cofitstaging/Pods-cofitstaging-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49702992F27241F00F893DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cofitpro-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49702A22F27241F00F893DF /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
+		};
+		E49702A32F27241F00F893DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitpro/Pods-cofitpro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitpro/Pods-cofitpro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cofitpro/Pods-cofitpro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49702A42F27241F00F893DF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitpro/Pods-cofitpro-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cofitpro/Pods-cofitpro-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cofitpro/Pods-cofitpro-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -250,18 +550,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E49702882F27241700F893DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E49702892F27241700F893DF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E497029A2F27241F00F893DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E497029B2F27241F00F893DF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Pachycephalosaurus.debug.xcconfig */;
+			baseConfigurationReference = F9E3CE1C908944E5862E5DB2 /* Pods-cofitapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2795XMGR8N;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Pachycephalosaurus/Info.plist;
+				INFOPLIST_FILE = cofitapp/cofitapp.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -273,7 +590,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = cofit.me;
 				PRODUCT_NAME = Pachycephalosaurus;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -283,12 +600,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Pachycephalosaurus.release.xcconfig */;
+			baseConfigurationReference = 59C3A119416AFC36F43BD934 /* Pods-cofitapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = Pachycephalosaurus/Info.plist;
+				DEVELOPMENT_TEAM = 2795XMGR8N;
+				INFOPLIST_FILE = cofitapp/cofitapp.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,7 +618,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = cofit.me;
 				PRODUCT_NAME = Pachycephalosaurus;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -453,10 +771,122 @@
 			};
 			name = Release;
 		};
+		E49702942F27241700F893DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C106974A5B628CA9A4E787AC /* Pods-cofitstaging.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2795XMGR8N;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = cofitstaging/cofitstaging.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cofitstaging.me;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		E49702952F27241700F893DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AFCCFFE64737821437089E4 /* Pods-cofitstaging.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2795XMGR8N;
+				INFOPLIST_FILE = cofitstaging/cofitstaging.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cofitstaging.me;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		E49702A62F27241F00F893DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE1B8EBC6557FBF1C4BECC33 /* Pods-cofitpro.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2795XMGR8N;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = cofitpro/cofitpro.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.cofit.CofitPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		E49702A72F27241F00F893DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA8DC0DECAA9C3CC113FE979 /* Pods-cofitpro.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2795XMGR8N;
+				INFOPLIST_FILE = cofitpro/cofitpro.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.cofit.CofitPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Pachycephalosaurus" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "cofitapp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -470,6 +900,24 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E49702932F27241700F893DF /* Build configuration list for PBXNativeTarget "cofitstaging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E49702942F27241700F893DF /* Debug */,
+				E49702952F27241700F893DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E49702A52F27241F00F893DF /* Build configuration list for PBXNativeTarget "cofitpro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E49702A62F27241F00F893DF /* Debug */,
+				E49702A72F27241F00F893DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
