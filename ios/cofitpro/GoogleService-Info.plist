@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>78906692519-57aaugrg1fgd0tkcj82m56cfq4dmapa8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.78906692519-57aaugrg1fgd0tkcj82m56cfq4dmapa8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDD_arhoHzlMZ9Gx6qrhsUZIGXZqjaERaM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>78906692519</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>me.cofit.CofitPro</string>
+	<key>PROJECT_ID</key>
+	<string>coft-pro</string>
+	<key>STORAGE_BUCKET</key>
+	<string>coft-pro.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:78906692519:ios:6dbf898c37350cfd84dc82</string>
+	<key>DATABASE_URL</key>
+	<string>https://coft-pro.firebaseio.com</string>
+</dict>
+</plist>

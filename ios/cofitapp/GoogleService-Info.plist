@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>570906617553-08lfuobgjrpk519q4e9lrj2p7liomrsl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.570906617553-08lfuobgjrpk519q4e9lrj2p7liomrsl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>570906617553-6vcosrc29lj3q2ftk6fcf6vmrga498e2.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCC7ewLhpMPghwiy9xojVHlT8ofMLZyjcU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>570906617553</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>cofit.me</string>
+	<key>PROJECT_ID</key>
+	<string>me-cofit-ironman</string>
+	<key>STORAGE_BUCKET</key>
+	<string>me-cofit-ironman.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:570906617553:ios:33beafd3ca7aa6689847f0</string>
+	<key>DATABASE_URL</key>
+	<string>https://me-cofit-ironman.firebaseio.com</string>
+</dict>
+</plist>

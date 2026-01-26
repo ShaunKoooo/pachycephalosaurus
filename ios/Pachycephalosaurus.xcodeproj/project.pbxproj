@@ -22,6 +22,9 @@
 		E49702C12F275C6600F893DF /* CofitappLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49702C02F275C6600F893DF /* CofitappLaunchScreen.storyboard */; };
 		E49702C32F275CB100F893DF /* CofitProLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49702C22F275CB100F893DF /* CofitProLaunchScreen.storyboard */; };
 		E49702C52F275CD800F893DF /* CofitStagingLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49702C42F275CD800F893DF /* CofitStagingLaunchScreen.storyboard */; };
+		E49702C72F27787500F893DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E49702C62F27787500F893DF /* GoogleService-Info.plist */; };
+		E49702C92F27788000F893DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E49702C82F27788000F893DF /* GoogleService-Info.plist */; };
+		E49702CB2F27788900F893DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E49702CA2F27788900F893DF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		E49702C02F275C6600F893DF /* CofitappLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CofitappLaunchScreen.storyboard; sourceTree = "<group>"; };
 		E49702C22F275CB100F893DF /* CofitProLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CofitProLaunchScreen.storyboard; sourceTree = "<group>"; };
 		E49702C42F275CD800F893DF /* CofitStagingLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CofitStagingLaunchScreen.storyboard; sourceTree = "<group>"; };
+		E49702C62F27787500F893DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E49702C82F27788000F893DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E49702CA2F27788900F893DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EE1B8EBC6557FBF1C4BECC33 /* Pods-cofitpro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitpro.debug.xcconfig"; path = "Target Support Files/Pods-cofitpro/Pods-cofitpro.debug.xcconfig"; sourceTree = "<group>"; };
 		F9E3CE1C908944E5862E5DB2 /* Pods-cofitapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitapp.debug.xcconfig"; path = "Target Support Files/Pods-cofitapp/Pods-cofitapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 		E49702AB2F2739B100F893DF /* cofitstaging */ = {
 			isa = PBXGroup;
 			children = (
+				E49702CA2F27788900F893DF /* GoogleService-Info.plist */,
 				E49702C42F275CD800F893DF /* CofitStagingLaunchScreen.storyboard */,
 				E49702BE2F27593100F893DF /* cofitstaging.xcassets */,
 				E49702A92F27241F00F893DF /* cofitstaging.plist */,
@@ -163,6 +170,7 @@
 		E49702AC2F2739B900F893DF /* cofitpro */ = {
 			isa = PBXGroup;
 			children = (
+				E49702C82F27788000F893DF /* GoogleService-Info.plist */,
 				E49702C22F275CB100F893DF /* CofitProLaunchScreen.storyboard */,
 				E49702BC2F27592600F893DF /* cofitpro.xcassets */,
 				E49702AE2F274A7800F893DF /* cofitpro.plist */,
@@ -173,6 +181,7 @@
 		E49702AD2F274A5000F893DF /* cofitapp */ = {
 			isa = PBXGroup;
 			children = (
+				E49702C62F27787500F893DF /* GoogleService-Info.plist */,
 				E49702C02F275C6600F893DF /* CofitappLaunchScreen.storyboard */,
 				E49702BA2F27591800F893DF /* cofitapp.xcassets */,
 				E49702972F27241700F893DF /* cofitapp.plist */,
@@ -285,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96D5359E50F82AFA1F49FAB0 /* PrivacyInfo.xcprivacy in Resources */,
+				E49702C72F27787500F893DF /* GoogleService-Info.plist in Resources */,
 				E49702C12F275C6600F893DF /* CofitappLaunchScreen.storyboard in Resources */,
 				E49702BB2F27591800F893DF /* cofitapp.xcassets in Resources */,
 			);
@@ -295,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E49702C52F275CD800F893DF /* CofitStagingLaunchScreen.storyboard in Resources */,
+				E49702CB2F27788900F893DF /* GoogleService-Info.plist in Resources */,
 				E497028F2F27241700F893DF /* PrivacyInfo.xcprivacy in Resources */,
 				E49702BF2F27593100F893DF /* cofitstaging.xcassets in Resources */,
 			);
@@ -305,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E49702C32F275CB100F893DF /* CofitProLaunchScreen.storyboard in Resources */,
+				E49702C92F27788000F893DF /* GoogleService-Info.plist in Resources */,
 				E49702A12F27241F00F893DF /* PrivacyInfo.xcprivacy in Resources */,
 				E49702BD2F27592600F893DF /* cofitpro.xcassets in Resources */,
 			);
