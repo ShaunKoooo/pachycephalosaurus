@@ -2,6 +2,6 @@
   <string name="app_name">Cofit Pro</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
   <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
-  <string moduleConfig="true" name="CodePushDeploymentKey">PLACEHOLDER_COFITPRO_KEY</string>
+  <string moduleConfig="true" name="CodePushDeploymentKey">UZQrrjZPhGsU60s4Tsnt-DuDfJKifmFG8PB</string>
   <string moduleConfig="true" name="CodePushServerUrl">https://codepush.appsonair.com</string>
 </resources>

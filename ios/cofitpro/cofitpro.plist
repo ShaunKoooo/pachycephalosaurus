@@ -14,6 +14,10 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CodePushDeploymentKey</key>
+  <string>arbRUm21LVHdidcG6WclOiBRxGbGfmFG8PB</string>
+  <key>CodePushServerURL</key>
+  <string>https://codepush.appsonair.com</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
