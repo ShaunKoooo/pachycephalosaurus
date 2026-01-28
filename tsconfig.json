@@ -5,6 +5,10 @@
       "jest",
       "i18next"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": [
     "**/*.ts",
