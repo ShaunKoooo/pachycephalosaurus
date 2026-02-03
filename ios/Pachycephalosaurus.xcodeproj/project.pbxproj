@@ -7,11 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29705B40DB2948E19B220089 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 0706868926CD49FFA2E55362 /* config.json */; };
 		2FF67CA764269ED6414CA9ED /* libPods-cofitapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A30728C9BC4348AFE19055 /* libPods-cofitapp.a */; };
+		4B867B5D23944F8EAA29B897 /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 425329F8B5534BA194AADBED /* fontello.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		82C6FE45C9E18CB88A0742D7 /* libPods-cofitstaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B06ECF8AAE1E9C132E65D38D /* libPods-cofitstaging.a */; };
 		96D5359E50F82AFA1F49FAB0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		A172820BB1AE65CA382F1C4D /* libPods-cofitpro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67EFA58B42DB94AC1AF9AC69 /* libPods-cofitpro.a */; };
+		E44DE5122F31F39F007B798E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 425329F8B5534BA194AADBED /* fontello.ttf */; };
+		E44DE5132F31F39F007B798E /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 0706868926CD49FFA2E55362 /* config.json */; };
+		E44DE5142F31F3AC007B798E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 425329F8B5534BA194AADBED /* fontello.ttf */; };
+		E44DE5152F31F3AC007B798E /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 0706868926CD49FFA2E55362 /* config.json */; };
 		E49702892F27241700F893DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		E497028F2F27241700F893DF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		E497029B2F27241F00F893DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
@@ -28,11 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0706868926CD49FFA2E55362 /* config.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = config.json; path = ../assets/fonts/config.json; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Pachycephalosaurus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pachycephalosaurus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Pachycephalosaurus/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		14A30728C9BC4348AFE19055 /* libPods-cofitapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cofitapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFCCFFE64737821437089E4 /* Pods-cofitstaging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitstaging.release.xcconfig"; path = "Target Support Files/Pods-cofitstaging/Pods-cofitstaging.release.xcconfig"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-Pachycephalosaurus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pachycephalosaurus.debug.xcconfig"; path = "Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus.debug.xcconfig"; sourceTree = "<group>"; };
+		425329F8B5534BA194AADBED /* fontello.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = fontello.ttf; path = ../assets/fonts/fontello.ttf; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Pachycephalosaurus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pachycephalosaurus.release.xcconfig"; path = "Target Support Files/Pods-Pachycephalosaurus/Pods-Pachycephalosaurus.release.xcconfig"; sourceTree = "<group>"; };
 		59C3A119416AFC36F43BD934 /* Pods-cofitapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cofitapp.release.xcconfig"; path = "Target Support Files/Pods-cofitapp/Pods-cofitapp.release.xcconfig"; sourceTree = "<group>"; };
 		67EFA58B42DB94AC1AF9AC69 /* libPods-cofitpro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cofitpro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +133,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				F7EBE74BEA9F4EAF80637369 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -187,6 +196,15 @@
 				E49702972F27241700F893DF /* cofitapp.plist */,
 			);
 			path = cofitapp;
+			sourceTree = "<group>";
+		};
+		F7EBE74BEA9F4EAF80637369 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				425329F8B5534BA194AADBED /* fontello.ttf */,
+				0706868926CD49FFA2E55362 /* config.json */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +315,8 @@
 				E49702C72F27787500F893DF /* GoogleService-Info.plist in Resources */,
 				E49702C12F275C6600F893DF /* CofitappLaunchScreen.storyboard in Resources */,
 				E49702BB2F27591800F893DF /* cofitapp.xcassets in Resources */,
+				4B867B5D23944F8EAA29B897 /* fontello.ttf in Resources */,
+				29705B40DB2948E19B220089 /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +324,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E44DE5122F31F39F007B798E /* fontello.ttf in Resources */,
+				E44DE5132F31F39F007B798E /* config.json in Resources */,
 				E49702C52F275CD800F893DF /* CofitStagingLaunchScreen.storyboard in Resources */,
 				E49702CB2F27788900F893DF /* GoogleService-Info.plist in Resources */,
 				E497028F2F27241700F893DF /* PrivacyInfo.xcprivacy in Resources */,
@@ -315,6 +337,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E44DE5142F31F3AC007B798E /* fontello.ttf in Resources */,
+				E44DE5152F31F3AC007B798E /* config.json in Resources */,
 				E49702C32F275CB100F893DF /* CofitProLaunchScreen.storyboard in Resources */,
 				E49702C92F27788000F893DF /* GoogleService-Info.plist in Resources */,
 				E49702A12F27241F00F893DF /* PrivacyInfo.xcprivacy in Resources */,
