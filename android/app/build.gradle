@@ -36,7 +36,34 @@ react {
 
     /* Bundling */
     //   A list containing the node command and its flags. Default is just 'node'.
-    // nodeExecutableAndArgs = ["node"]
+    // Configure node executable path
+    def localProperties = new Properties()
+    def localPropertiesFile = rootProject.file('local.properties')
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.withInputStream { localProperties.load(it) }
+    }
+    def nodeExec = localProperties.getProperty('nodeExecutable')
+    if (nodeExec) {
+        nodeExecutableAndArgs = [nodeExec]
+    } else {
+        // Auto-detect node from common locations
+        def homeDir = System.getProperty("user.home")
+        def nodePath = null
+        def nvmDir = new File("$homeDir/.nvm/versions/node")
+        if (nvmDir.exists() && nvmDir.isDirectory()) {
+            def versions = nvmDir.listFiles()?.findAll { it.isDirectory() }?.sort()
+            if (versions) {
+                def latestVersion = versions.last()
+                def nodeBin = new File(latestVersion, "bin/node")
+                if (nodeBin.exists() && nodeBin.canExecute()) {
+                    nodePath = nodeBin.absolutePath
+                }
+            }
+        }
+        if (nodePath) {
+            nodeExecutableAndArgs = [nodePath]
+        }
+    }
     //
     //   The command to run when bundling. By default is 'bundle'
     // bundleCommand = "ram-bundle"

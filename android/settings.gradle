@@ -1,6 +1,67 @@
 pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
 plugins { id("com.facebook.react.settings") }
-extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
+
+// Automatically detect node executable from common locations
+def findNodeExecutable() {
+    // 1. Check local.properties first (for manual override)
+    def localProperties = new Properties()
+    def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.withInputStream { localProperties.load(it) }
+        def nodeFromProps = localProperties.getProperty('nodeExecutable')
+        if (nodeFromProps) return nodeFromProps
+    }
+
+    // 2. Check common Node version manager paths
+    def homeDir = System.getProperty("user.home")
+    def commonPaths = [
+        // NVM (Node Version Manager)
+        "$homeDir/.nvm/versions/node",
+        // Homebrew
+        "/opt/homebrew/bin/node",
+        "/usr/local/bin/node",
+        // asdf
+        "$homeDir/.asdf/shims/node",
+        // fnm
+        "$homeDir/.fnm/node-versions",
+    ]
+
+    // Try to find node in common locations
+    for (path in commonPaths) {
+        def nodeFile = new File(path)
+        if (nodeFile.exists()) {
+            // For version managers with multiple versions, try to get the current version
+            if (path.contains("versions/node")) {
+                // NVM: find the latest or current version
+                def versionsDir = nodeFile
+                if (versionsDir.isDirectory()) {
+                    def versions = versionsDir.listFiles()?.findAll { it.isDirectory() }?.sort()
+                    if (versions) {
+                        def latestVersion = versions.last()
+                        def nodeBin = new File(latestVersion, "bin/node")
+                        if (nodeBin.exists() && nodeBin.canExecute()) {
+                            return nodeBin.absolutePath
+                        }
+                    }
+                }
+            } else if (nodeFile.canExecute()) {
+                return nodeFile.absolutePath
+            }
+        }
+    }
+
+    // 3. Fallback to 'node' command (will work if node is in PATH)
+    return 'node'
+}
+
+def nodeExecutable = findNodeExecutable()
+println "Using node executable: $nodeExecutable"
+
+extensions.configure(com.facebook.react.ReactSettingsExtension){ ex ->
+    // Use node to resolve CLI path and run config command
+    def cliPath = [nodeExecutable, "--print", "require.resolve('@react-native-community/cli')"].execute(null, file("../")).text.trim()
+    ex.autolinkLibrariesFromCommand([nodeExecutable, cliPath, "config"])
+}
 rootProject.name = 'Pachycephalosaurus'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
