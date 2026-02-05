@@ -4,7 +4,7 @@ import Svg, { Path, Circle, SvgProps } from 'react-native-svg';
 const DEFAULT_WIDTH = 196;
 const DEFAULT_HEIGHT = 167;
 
-const LogoPortrait = ({ width, height, ...props }: SvgProps) => {
+export const LogoPortrait = ({ width, height, ...props }: SvgProps) => {
   let w = width;
   let h = height;
 
@@ -40,5 +40,3 @@ const LogoPortrait = ({ width, height, ...props }: SvgProps) => {
     </Svg>
   );
 };
-
-export default LogoPortrait;
