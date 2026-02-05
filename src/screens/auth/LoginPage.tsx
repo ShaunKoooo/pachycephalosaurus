@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   StyleSheet,
+  Text,
+  TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Alert,
+  Animated,
 } from 'react-native';
 import { LoginFooter, EmailLoginForm, PhoneLoginForm } from '@/components/auth';
 import { LogoPortrait } from '@/components/logos';
+import { FontelloIcon } from '@/components';
 import { useAppDispatch } from '@/store/hooks';
 import { loginWithPhone } from '@/store/slices/authSlice';
+import { Colors } from '@/theme';
 
 type LoginMethod = 'phone' | 'email';
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
   const [loginMethod, setLoginMethod] = useState<LoginMethod>('phone');
+  const [showSwitchIcon, setShowSwitchIcon] = useState(false);
+  const slideAnim = useRef(new Animated.Value(50)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const handlePhoneLogin = async (phone: string, verificationCode: string) => {
     try {
@@ -39,9 +47,27 @@ export default function LoginPage() {
     Alert.alert('提示', '忘記密碼功能開發中');
   };
 
-  const toggleLoginMethod = () => {
-    setLoginMethod((prev) => (prev === 'phone' ? 'email' : 'phone'));
-  };
+  useEffect(() => {
+    if (showSwitchIcon) {
+      // 顯示動畫：由下往上滑入 + 淡入
+      Animated.parallel([
+        Animated.timing(slideAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    } else {
+      // 重置動畫值
+      slideAnim.setValue(50);
+      fadeAnim.setValue(0);
+    }
+  }, [showSwitchIcon]);
 
   return (
     <KeyboardAvoidingView
@@ -67,12 +93,54 @@ export default function LoginPage() {
               onForgotPassword={handleForgotPassword}
             />
           )}
+
           {/* 切換登入方式 */}
-          {/* <TouchableOpacity style={styles.switchButton} onPress={toggleLoginMethod}>
-            <Text style={styles.switchButtonText}>
-              {loginMethod === 'phone' ? '以專家身份登入' : '使用手機登入'}
-            </Text>
-          </TouchableOpacity> */}
+          <View style={styles.switchContainer}>
+            <TouchableOpacity onPress={() => setShowSwitchIcon(!showSwitchIcon)}>
+              <Text style={styles.switchText}>或使用其他登入方式</Text>
+            </TouchableOpacity>
+            {showSwitchIcon && (
+              <Animated.View
+                style={[
+                  styles.iconContainer,
+                  {
+                    transform: [{ translateY: slideAnim }],
+                    opacity: fadeAnim,
+                  },
+                ]}
+              >
+                {loginMethod === 'phone' ? (
+                  <TouchableOpacity
+                    style={styles.iconButton}
+                    onPress={() => {
+                      setLoginMethod('email');
+                      setShowSwitchIcon(false);
+                    }}
+                  >
+                    <FontelloIcon
+                      name="ic_mail_24px"
+                      size={24}
+                      color={'white'}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.iconButton}
+                    onPress={() => {
+                      setLoginMethod('phone');
+                      setShowSwitchIcon(false);
+                    }}
+                  >
+                    <FontelloIcon
+                      name="ic_phone_iphone_24px"
+                      size={24}
+                      color={'white'}
+                    />
+                  </TouchableOpacity>
+                )}
+              </Animated.View>
+            )}
+          </View>
         </View>
 
         {/* 底部資訊 - 固定在最下方 */}
@@ -103,13 +171,24 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 24,
   },
-  switchButton: {
+  switchContainer: {
     alignItems: 'center',
-    paddingVertical: 16,
+    marginTop: 10,
   },
-  switchButtonText: {
-    color: '#000000',
+  switchText: {
+    color: Colors.primary,
     fontSize: 14,
-    textDecorationLine: 'underline',
+  },
+  iconContainer: {
+    alignItems: 'center',
+    marginTop: 12,
+  },
+  iconButton: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#EA5455',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

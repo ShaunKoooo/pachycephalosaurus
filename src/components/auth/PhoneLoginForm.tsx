@@ -141,17 +141,12 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
         title="登入"
         onPress={handleLogin}
       />
-
-      <TouchableOpacity style={styles.otherLoginContainer}>
-        <Text style={styles.otherLoginText}>或使用其他登入方式</Text>
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   formContainer: {
-    flex: 1,
   },
   phoneRow: {
     flexDirection: 'row',
@@ -192,16 +187,6 @@ const styles = StyleSheet.create({
     color: '#000000',
     paddingVertical: 8,
     paddingHorizontal: 0,
-  },
-  otherLoginContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginTop: 10,
-  },
-  otherLoginText: {
-    color: Colors.primary,
-    fontSize: 12,
   },
   sendCodeButton: {
     alignItems: 'center',

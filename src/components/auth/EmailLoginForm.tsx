@@ -98,17 +98,12 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
           </TouchableOpacity>
         </View>
       )}
-
-      <TouchableOpacity style={styles.otherLoginContainer}>
-        <Text style={styles.otherLoginText}>或使用其他登入方式</Text>
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   formContainer: {
-    flex: 1,
   },
   title: {
     color: '#000',
@@ -164,7 +159,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
   },
   registerText: {
     color: 'black',
@@ -175,14 +169,5 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontSize: 18,
     fontWeight: '500',
-  },
-  otherLoginContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
-  },
-  otherLoginText: {
-    color: Colors.primary,
-    fontSize: 14,
   },
 });
