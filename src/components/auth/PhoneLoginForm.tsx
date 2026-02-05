@@ -9,13 +9,16 @@ import {
 } from 'react-native';
 import { Colors } from '@/theme';
 import { MyButton } from '@/components';
+import { CountryCodePicker } from './CountryCodePicker';
+import { DEFAULT_COUNTRY, CountryCode } from '@/data/countryCodes';
 
 interface PhoneLoginFormProps {
   onLogin: (phone: string, code: string) => Promise<void>;
 }
 
 export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
-  const [countryCode] = useState('+886');
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
+  const [showPicker, setShowPicker] = useState(false);
   const [phone, setPhone] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [activateCode, setActivateCode] = useState('');
@@ -36,7 +39,7 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
 
     try {
       setIsSending(true);
-      const mobile = `${countryCode}${phone}`;
+      const mobile = `${selectedCountry.code}${phone}`;
       console.log('發送驗證碼到手機:', mobile);
 
       // TODO: 實際 API 調用
@@ -55,7 +58,7 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
   };
 
   const handleLogin = () => {
-    const mobile = `${countryCode}${phone}`;
+    const mobile = `${selectedCountry.code}${phone}`;
     onLogin(mobile, verificationCode);
   };
 
@@ -69,8 +72,10 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
       {/* 國碼 + 手機號碼 */}
       <View style={styles.phoneRow}>
         <View style={styles.inputGroup}>
-          <TouchableOpacity style={styles.countryCodeButton}>
-            <Text style={styles.countryCodeText}>{countryCode}</Text>
+          <TouchableOpacity
+            style={styles.countryCodeButton}
+            onPress={() => setShowPicker(true)}>
+            <Text style={styles.countryCodeText}>{selectedCountry.code}</Text>
             <Text style={styles.dropdownIcon}>▼</Text>
           </TouchableOpacity>
         </View>
@@ -140,6 +145,14 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
         isActive={!!phone && !!verificationCode}
         title="登入"
         onPress={handleLogin}
+      />
+
+      {/* 國碼選擇器 */}
+      <CountryCodePicker
+        visible={showPicker}
+        selectedCode={selectedCountry.code}
+        onSelect={setSelectedCountry}
+        onClose={() => setShowPicker(false)}
       />
     </View>
   );
