@@ -13247,6 +13247,18 @@
       ]
     },
     {
+      "uid": "e45a3da2ebde8bc8e30a873f3bd51f30",
+      "css": "eye",
+      "code": 59834,
+      "src": "elusive"
+    },
+    {
+      "uid": "d218294e6f9f7191f6b0b3d1ff6239ff",
+      "css": "eye-off",
+      "code": 59835,
+      "src": "elusive"
+    },
+    {
       "uid": "7cca26ab74488a0d1a0c686e2e8e878e",
       "css": "ic_3d_rotation_24px",
       "code": 59396,
