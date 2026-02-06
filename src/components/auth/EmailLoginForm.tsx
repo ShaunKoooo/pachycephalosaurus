@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Colors } from '@/theme';
 import { MyButton, FontelloIcon } from '@/components';
 import { useAppDispatch } from '@/store/hooks';
@@ -22,6 +23,7 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
   onRegister,
   showToast: showToastProp,
 }) => {
+  const { t } = useTranslation(['auth', 'common']);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,7 +37,7 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
 
   const handleLogin = async () => {
     if (!email || !password) {
-      showToast('請輸入 Email 和密碼', 'error');
+      showToast(t('auth:emailLogin.requiredFields'), 'error');
       return;
     }
 
@@ -44,7 +46,7 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
       await dispatch(loginWithEmail({ email, password })).unwrap();
       // 登入成功後會自動導航到主頁，不顯示 Toast
     } catch (error: any) {
-      const errorMessage = typeof error === 'string' ? error : (error?.message || '登入失敗，請檢查帳號密碼');
+      const errorMessage = typeof error === 'string' ? error : (error?.message || t('auth:emailLogin.loginFailed'));
       showToast(errorMessage, 'error');
     } finally {
       setIsLoading(false);
@@ -54,16 +56,16 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
   return (
     <View style={styles.formContainer}>
       <View style={{ marginBottom: 40, marginTop: 10 }}>
-        <Text style={styles.title}>帳密登入</Text>
+        <Text style={styles.title}>{t('auth:emailLogin.title')}</Text>
       </View>
 
       {/* Email 輸入 */}
       <View style={styles.inputRow}>
-        <Text style={styles.label}>帳號</Text>
+        <Text style={styles.label}>{t('auth:emailLogin.accountLabel')}</Text>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="請輸入 Email"
+            placeholder={t('auth:emailLogin.emailPlaceholder')}
             placeholderTextColor="rgba(0, 0, 0, 0.5)"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -75,11 +77,11 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
 
       {/* 密碼輸入 */}
       <View style={styles.inputRow}>
-        <Text style={styles.label}>密碼</Text>
+        <Text style={styles.label}>{t('auth:emailLogin.passwordLabel')}</Text>
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.input}
-            placeholder="請輸入密碼"
+            placeholder={t('auth:emailLogin.passwordPlaceholder')}
             placeholderTextColor="rgba(0, 0, 0, 0.5)"
             secureTextEntry={!showPassword}
             value={password}
@@ -101,23 +103,23 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
       {/* 登入按鈕 */}
       <MyButton
         isActive={!!email && !!password && !isLoading}
-        title={isLoading ? '登入中...' : '登入'}
+        title={isLoading ? t('common:button.signingIn') : t('common:button.signIn')}
         onPress={handleLogin}
       />
 
       {/* 忘記密碼 */}
       {onForgotPassword && (
         <TouchableOpacity onPress={onForgotPassword} style={styles.forgotPasswordContainer}>
-          <Text style={styles.forgotPasswordText}>忘記密碼？</Text>
+          <Text style={styles.forgotPasswordText}>{t('auth:emailLogin.forgotPassword')}</Text>
         </TouchableOpacity>
       )}
 
       {/* 註冊提示 */}
       {(
         <View style={styles.registerContainer}>
-          <Text style={styles.registerText}>還沒有帳號？</Text>
+          <Text style={styles.registerText}>{t('auth:emailLogin.noAccount')}</Text>
           <TouchableOpacity onPress={onRegister}>
-            <Text style={styles.registerLink}>註冊</Text>
+            <Text style={styles.registerLink}>{t('common:button.signUp')}</Text>
           </TouchableOpacity>
         </View>
       )}

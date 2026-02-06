@@ -22,7 +22,7 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({
   onLogin,
   showToast: showToastProp,
 }) => {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation(['auth', 'common']);
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
   const [showPicker, setShowPicker] = useState(false);
   const [phone, setPhone] = useState('');
@@ -56,13 +56,13 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({
       const result = await sendSmsCode({ mobile }).unwrap();
 
       if (result.ok) {
-        showToast(t('phoneLogin.codeSent'), 'success');
+        showToast(t('auth:phoneLogin.codeSent'), 'success');
         setCodeSent(true);
         setCountdown(60);
       }
     } catch (error: any) {
       console.error('發送驗證碼失敗:', error);
-      const errorMessage = error?.data?.message || error?.data?.errors || error?.message || t('phoneLogin.sendFailed');
+      const errorMessage = error?.data?.message || error?.data?.errors || error?.message || t('auth:phoneLogin.sendFailed');
       showToast(errorMessage, 'error');
     }
   };
@@ -77,7 +77,7 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({
   return (
     <View style={styles.formContainer}>
       <View style={{ marginBottom: 40, marginTop: 10 }}>
-        <Text style={styles.title}>{t('phoneLogin.title')}</Text>
+        <Text style={styles.title}>{t('auth:phoneLogin.title')}</Text>
       </View>
       {/* 國碼 + 手機號碼 */}
       <View style={styles.phoneRow}>
@@ -93,7 +93,7 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({
         <View style={[styles.inputGroup, { flex: 1 }]}>
           <TextInput
             style={styles.input}
-            placeholder={t('phoneLogin.phonePlaceholder')}
+            placeholder={t('auth:phoneLogin.phonePlaceholder')}
             placeholderTextColor="rgba(0, 0, 0, 0.5)"
             value={phone}
             onChangeText={setPhone}
@@ -110,7 +110,7 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({
               fontSize: 16,
               color: '#000000',
             }}
-            placeholder={t('phoneLogin.verificationCodePlaceholder')}
+            placeholder={t('auth:phoneLogin.verificationCodePlaceholder')}
             placeholderTextColor="rgba(0, 0, 0, 0.5)"
             value={verificationCode}
             onChangeText={setVerificationCode}
@@ -120,28 +120,28 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({
         </View>
         <View style={styles.codeButtonContainer}>
           {codeSent && countdown > 0 ? (
-            <Text style={styles.countdownText}>{t('phoneLogin.resendCountdown', { countdown })}</Text>
+            <Text style={styles.countdownText}>{t('auth:phoneLogin.resendCountdown', { countdown })}</Text>
           ) : codeSent ? (
             <TouchableOpacity onPress={handleSendCode}>
-              <Text style={styles.resendText}>{t('phoneLogin.resendCode')}</Text>
+              <Text style={styles.resendText}>{t('auth:phoneLogin.resendCode')}</Text>
             </TouchableOpacity>
           ) : null}
           {/* 獲取驗證碼按鈕 */}
           {isPhoneComplete && !codeSent && (
             <TouchableOpacity style={styles.sendCodeButton} onPress={handleSendCode}>
-              <Text style={styles.sendCodeText}>{t('phoneLogin.sendCode')}</Text>
+              <Text style={styles.sendCodeText}>{t('auth:phoneLogin.sendCode')}</Text>
             </TouchableOpacity>
           )}
         </View>
       </View>
 
       {/* 提示文字 */}
-      <Text style={styles.infoText}>{t('phoneLogin.info')}</Text>
+      <Text style={styles.infoText}>{t('auth:phoneLogin.info')}</Text>
 
       <View style={[styles.inputGroup, { marginRight: 0, marginBottom: 30 }]}>
         <TextInput
           style={styles.input}
-          placeholder={t('phoneLogin.activateCodePlaceholder')}
+          placeholder={t('auth:phoneLogin.activateCodePlaceholder')}
           placeholderTextColor="rgba(0, 0, 0, 0.5)"
           value={activateCode}
           onChangeText={setActivateCode}
@@ -153,7 +153,7 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({
       {/* 登入按鈕 */}
       <MyButton
         isActive={!!phone && !!verificationCode}
-        title={t('phoneLogin.submit')}
+        title={t('common:button.signIn')}
         onPress={handleLogin}
       />
 

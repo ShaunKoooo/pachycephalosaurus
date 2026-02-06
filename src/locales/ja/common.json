@@ -1,70 +1,7 @@
 {
   "button": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "delete": "Delete",
-    "edit": "Edit",
-    "back": "Back",
-    "next": "Next",
-    "submit": "Submit",
-    "close": "Close",
-    "done": "Done",
-    "retry": "Retry",
-    "refresh": "Refresh",
-    "viewMore": "View More",
-    "viewLess": "View Less"
-  },
-  "label": {
-    "loading": "Loading...",
-    "noData": "No data available",
-    "search": "Search",
-    "filter": "Filter",
-    "sort": "Sort",
-    "all": "All",
-    "new": "New",
-    "popular": "Popular",
-    "recent": "Recent"
-  },
-  "time": {
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "tomorrow": "Tomorrow",
-    "thisWeek": "This Week",
-    "thisMonth": "This Month",
-    "lastWeek": "Last Week",
-    "lastMonth": "Last Month",
-    "daysAgo": "{{count}} day ago",
-    "daysAgo_plural": "{{count}} days ago",
-    "hoursAgo": "{{count}} hour ago",
-    "hoursAgo_plural": "{{count}} hours ago",
-    "minutesAgo": "{{count}} minute ago",
-    "minutesAgo_plural": "{{count}} minutes ago",
-    "justNow": "Just now"
-  },
-  "units": {
-    "kg": "kg",
-    "lb": "lb",
-    "cm": "cm",
-    "inch": "in",
-    "km": "km",
-    "mile": "mi",
-    "cal": "cal",
-    "kcal": "kcal",
-    "min": "min",
-    "hour": "hr",
-    "rep": "rep",
-    "set": "set"
-  },
-  "message": {
-    "success": "Success",
-    "failed": "Failed",
-    "saved": "Saved successfully",
-    "deleted": "Deleted successfully",
-    "updated": "Updated successfully",
-    "confirmDelete": "Are you sure you want to delete this?",
-    "noInternet": "No internet connection",
-    "tryAgain": "Please try again",
-    "comingSoon": "Coming soon"
+    "signIn": "ログイン",
+    "signUp": "登録",
+    "signingIn": "ログイン中..."
   }
 }
