@@ -9,6 +9,7 @@ import {
   ScrollView,
   Animated,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { LoginFooter, EmailLoginForm, PhoneLoginForm } from '@/components/auth';
 import { LogoPortrait } from '@/components/logos';
 import { FontelloIcon, Toast } from '@/components';
@@ -17,6 +18,7 @@ import { loginWithPhone, setLoginMethod } from '@/store/slices/authSlice';
 import { Colors } from '@/theme';
 
 export default function LoginPage() {
+  const { t } = useTranslation('auth');
   const dispatch = useAppDispatch();
   const loginMethod = useAppSelector((state) => state.auth.loginMethod);
   const [showSwitchIcon, setShowSwitchIcon] = useState(false);
@@ -37,14 +39,14 @@ export default function LoginPage() {
       await dispatch(loginWithPhone({ phone, verificationCode })).unwrap();
       // 登入成功後會自動導航到主頁，不顯示 Toast
     } catch (error: any) {
-      const errorMessage = typeof error === 'string' ? error : (error?.message || '登入失敗，請稍後再試');
+      const errorMessage = typeof error === 'string' ? error : (error?.message || t('loginPage.loginFailed'));
       showToast(errorMessage, 'error');
     }
   };
 
   const handleForgotPassword = () => {
     // TODO: 導航到忘記密碼頁面
-    showToast('忘記密碼功能開發中', 'error');
+    showToast(t('loginPage.forgotPasswordComingSoon'), 'error');
   };
 
   useEffect(() => {
@@ -97,7 +99,7 @@ export default function LoginPage() {
           {/* 切換登入方式 */}
           <View style={styles.switchContainer}>
             <TouchableOpacity onPress={() => setShowSwitchIcon(!showSwitchIcon)}>
-              <Text style={styles.switchText}>或使用其他登入方式</Text>
+              <Text style={styles.switchText}>{t('loginPage.switchMethod')}</Text>
             </TouchableOpacity>
             {showSwitchIcon && (
               <Animated.View
