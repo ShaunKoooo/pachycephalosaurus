@@ -27,8 +27,17 @@ const baseQueryWithAuth: BaseQueryFn<
   const result = await baseQuery(args, api, extraOptions);
 
   // 如果收到 401 錯誤，自動登出
+  // 但排除登入相關的 API（登入失敗時的 401 是正常的，不應該觸發 logout）
   if (result.error && result.error.status === 401) {
-    api.dispatch(logoutAsync());
+    const url = typeof args === 'string' ? args : args.url;
+    const isLoginRequest = url.includes('/sign_in') ||
+                          url.includes('/register_mobile_with_code') ||
+                          url.includes('/mobile_sms_code');
+
+    // 只有非登入請求的 401 才執行 logout（表示 token 過期或無效）
+    if (!isLoginRequest) {
+      api.dispatch(logoutAsync());
+    }
   }
 
   return result;

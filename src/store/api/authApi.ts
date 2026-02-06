@@ -42,6 +42,23 @@ export interface RegisterMobileResponse {
   pq_login_info: PQLoginInfo;
 }
 
+// Email 登入的請求和回應類型
+export interface SignInWithEmailRequest {
+  app_name: string;
+  source: string;
+  email: string;
+  password: string;
+}
+
+export interface SignInWithEmailResponse {
+  access_token: string;
+  first_name: string | null;
+  last_name: string;
+  nick_name: string;
+  avatar_thumbnail_url: string;
+  terms_of_service_agreed: boolean;
+}
+
 // 取得 app_name，根據不同環境
 const getAppName = (): string => {
   const appType = Config.APP_TYPE;
@@ -53,10 +70,15 @@ const getAppName = (): string => {
     case 'cofitapp':
       return 'cofit_app'; // production 環境使用 cofit_app
     case 'cofitpro':
-      return 'cofit_pro'; // pro 版本（但你說不用實作）
+      return 'cofit_pro'; // pro 版本
     default:
       return 'cofit_app';
   }
+};
+
+// 取得 API 基礎路徑（cofitpro 用 users，其他用 clients）
+const getApiBasePath = (): string => {
+  return Config.APP_TYPE === 'cofitpro' ? 'users' : 'clients';
 };
 
 // 擴展 baseApi 添加認證相關的 endpoints
@@ -106,6 +128,30 @@ export const authApi = baseApi.injectEndpoints({
       // 登入成功後標記 User cache 為失效，需要重新獲取
       invalidatesTags: ['User'],
     }),
+
+    // Email 登入
+    signInWithEmail: builder.mutation<
+      SignInWithEmailResponse,
+      { email: string; password: string }
+    >({
+      query: ({ email, password }) => ({
+        url: `/v4/${getApiBasePath()}/sign_in`,
+        method: 'POST',
+        body: {
+          app_name: getAppName(),
+          source: 'cofit',
+          email,
+          password,
+        },
+        headers: {
+          'accept': 'application/json, text/plain, */*',
+          'authorization': 'Bearer',
+          'token': '',
+        },
+      }),
+      // 登入成功後標記 User cache 為失效，需要重新獲取
+      invalidatesTags: ['User'],
+    }),
   }),
   overrideExisting: false,
 });
@@ -113,5 +159,6 @@ export const authApi = baseApi.injectEndpoints({
 // 導出 hooks 供組件使用
 export const {
   useSendSmsCodeMutation,
-  useRegisterMobileWithCodeMutation
+  useRegisterMobileWithCodeMutation,
+  useSignInWithEmailMutation
 } = authApi;

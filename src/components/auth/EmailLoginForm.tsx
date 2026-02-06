@@ -8,24 +8,50 @@ import {
 } from 'react-native';
 import { Colors } from '@/theme';
 import { MyButton, FontelloIcon } from '@/components';
+import { useAppDispatch } from '@/store/hooks';
+import { loginWithEmail } from '@/store/slices/authSlice';
 
 interface EmailLoginFormProps {
-  onLogin: (email: string, password: string) => Promise<void>;
   onForgotPassword?: () => void;
   onRegister?: () => void;
+  showToast?: (message: string, type?: 'success' | 'error') => void;
 }
 
 export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
-  onLogin,
   onForgotPassword,
   onRegister,
+  showToast: showToastProp,
 }) => {
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {
-    onLogin(email, password);
+  // 使用父組件傳入的 showToast，如果沒有則使用本地實現（向後兼容）
+  const showToast = showToastProp || ((message: string, type: 'success' | 'error' = 'success') => {
+    console.warn('Toast not available:', message, type);
+  });
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      showToast('請輸入 Email 和密碼', 'error');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await dispatch(loginWithEmail({ email, password })).unwrap();
+      // 登入成功後會自動導航到主頁，不顯示 Toast
+    } catch (error: any) {
+      console.error('❌ Email 登入失敗:', error);
+      console.error('❌ Error type:', typeof error);
+      const errorMessage = typeof error === 'string' ? error : (error?.message || '登入失敗，請檢查帳號密碼');
+      console.error('❌ 顯示 Toast:', errorMessage);
+      showToast(errorMessage, 'error');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -77,8 +103,8 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
 
       {/* 登入按鈕 */}
       <MyButton
-        isActive={!!email && !!password}
-        title="登入"
+        isActive={!!email && !!password && !isLoading}
+        title={isLoading ? '登入中...' : '登入'}
         onPress={handleLogin}
       />
 

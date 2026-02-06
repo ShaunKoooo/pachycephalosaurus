@@ -15,6 +15,8 @@ export interface User {
   avatar_thumbnail_url?: string;
 }
 
+export type LoginMethod = 'phone' | 'email';
+
 interface AuthState {
   user: User | null;
   token: string | null;
@@ -23,6 +25,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+  loginMethod: LoginMethod;
 }
 
 const initialState: AuthState = {
@@ -33,6 +36,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
+  loginMethod: 'phone',
 };
 
 // Storage keys
@@ -109,7 +113,54 @@ export const loginWithPhone = createAsyncThunk(
         userRole: 'client' as const,
       };
     } catch (error: any) {
-      return rejectWithValue(error?.data?.message || error.message || '登入失敗');
+      const errorMessage = error?.data?.message || error?.data?.errors || error?.message || '登入失敗';
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+// Email 登入
+export const loginWithEmail = createAsyncThunk(
+  'auth/loginWithEmail',
+  async (
+    { email, password }: { email: string; password: string },
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      // 調用真實 API
+      const result = await dispatch(
+        authApi.endpoints.signInWithEmail.initiate({
+          email,
+          password,
+        })
+      ).unwrap();
+
+      // 構建用戶資料
+      const userData: User = {
+        id: result.nick_name, // Email 登入沒有 cofit_uid，暫時用 nick_name
+        name: result.nick_name || result.last_name || result.first_name || '',
+        role: 'client',
+        first_name: result.first_name || undefined,
+        last_name: result.last_name,
+        nick_name: result.nick_name,
+        avatar_thumbnail_url: result.avatar_thumbnail_url,
+      };
+
+      // 儲存到 AsyncStorage
+      await Promise.all([
+        AsyncStorage.setItem(STORAGE_KEYS.TOKEN, result.access_token),
+        AsyncStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userData)),
+        AsyncStorage.setItem(STORAGE_KEYS.ROLE, 'client'),
+      ]);
+
+      return {
+        token: result.access_token,
+        user: userData,
+        userRole: 'client' as const,
+      };
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || error?.data?.errors || error?.message || '登入失敗';
+      return rejectWithValue(errorMessage);
     }
   }
 );
@@ -151,6 +202,9 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    setLoginMethod: (state, action: PayloadAction<LoginMethod>) => {
+      state.loginMethod = action.payload;
+    },
     logout: (state) => {
       return initialState;
     },
@@ -176,11 +230,10 @@ const authSlice = createSlice({
     // 手機驗證碼登入
     builder
       .addCase(loginWithPhone.pending, (state) => {
-        state.isLoading = true;
+        // 不設置 isLoading，避免 RootNavigator 重新渲染
         state.error = null;
       })
       .addCase(loginWithPhone.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isAuthenticated = true;
         state.token = action.payload.token;
         state.user = action.payload.user;
@@ -188,7 +241,23 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginWithPhone.rejected, (state, action) => {
-        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    // Email 登入
+    builder
+      .addCase(loginWithEmail.pending, (state) => {
+        // 不設置 isLoading，避免 RootNavigator 重新渲染
+        state.error = null;
+      })
+      .addCase(loginWithEmail.fulfilled, (state, action) => {
+        state.isAuthenticated = true;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+        state.userRole = action.payload.userRole;
+        state.error = null;
+      })
+      .addCase(loginWithEmail.rejected, (state, action) => {
         state.error = action.payload as string;
       });
 
@@ -204,5 +273,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, clearError, logout } = authSlice.actions;
+export const { setCredentials, clearError, setLoginMethod, logout } = authSlice.actions;
 export default authSlice.reducer;

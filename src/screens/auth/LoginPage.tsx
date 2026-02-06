@@ -12,19 +12,27 @@ import {
 } from 'react-native';
 import { LoginFooter, EmailLoginForm, PhoneLoginForm } from '@/components/auth';
 import { LogoPortrait } from '@/components/logos';
-import { FontelloIcon } from '@/components';
-import { useAppDispatch } from '@/store/hooks';
-import { loginWithPhone } from '@/store/slices/authSlice';
+import { FontelloIcon, Toast } from '@/components';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { loginWithPhone, setLoginMethod } from '@/store/slices/authSlice';
 import { Colors } from '@/theme';
-
-type LoginMethod = 'phone' | 'email';
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
-  const [loginMethod, setLoginMethod] = useState<LoginMethod>('phone');
+  const loginMethod = useAppSelector((state) => state.auth.loginMethod);
   const [showSwitchIcon, setShowSwitchIcon] = useState(false);
   const slideAnim = useRef(new Animated.Value(50)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState<'success' | 'error'>('success');
+
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+    console.log('🔔 LoginPage.showToast called:', { message, type, currentVisible: toastVisible });
+    setToastMessage(message);
+    setToastType(type);
+    setToastVisible(true);
+  };
 
   const handlePhoneLogin = async (phone: string, verificationCode: string) => {
     try {
@@ -34,12 +42,6 @@ export default function LoginPage() {
       console.error('❌ 登入失敗:', error);
       Alert.alert('登入失敗', error || '請稍後再試');
     }
-  };
-
-  const handleEmailLogin = async (email: string, password: string) => {
-    // TODO: 實作 email 登入
-    console.log('Email 登入:', email);
-    Alert.alert('提示', 'Email 登入功能開發中');
   };
 
   const handleForgotPassword = () => {
@@ -69,6 +71,10 @@ export default function LoginPage() {
     }
   }, [showSwitchIcon]);
 
+  useEffect(() => {
+    console.log('🔔 Toast state changed:', { toastVisible, toastMessage, toastType });
+  }, [toastVisible, toastMessage, toastType]);
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -89,8 +95,8 @@ export default function LoginPage() {
             <PhoneLoginForm onLogin={handlePhoneLogin} />
           ) : (
             <EmailLoginForm
-              onLogin={handleEmailLogin}
               onForgotPassword={handleForgotPassword}
+              showToast={showToast}
             />
           )}
 
@@ -113,7 +119,7 @@ export default function LoginPage() {
                   <TouchableOpacity
                     style={styles.iconButton}
                     onPress={() => {
-                      setLoginMethod('email');
+                      dispatch(setLoginMethod('email'));
                       setShowSwitchIcon(false);
                     }}
                   >
@@ -127,7 +133,7 @@ export default function LoginPage() {
                   <TouchableOpacity
                     style={styles.iconButton}
                     onPress={() => {
-                      setLoginMethod('phone');
+                      dispatch(setLoginMethod('phone'));
                       setShowSwitchIcon(false);
                     }}
                   >
@@ -146,6 +152,18 @@ export default function LoginPage() {
         {/* 底部資訊 - 固定在最下方 */}
         <LoginFooter />
       </ScrollView>
+
+      {/* Toast 提示 */}
+      <Toast
+        message={toastMessage}
+        visible={toastVisible}
+        duration={3000}
+        type={toastType}
+        onHide={() => {
+          console.log('🔔 Toast onHide called');
+          setToastVisible(false);
+        }}
+      />
     </KeyboardAvoidingView>
   );
 }

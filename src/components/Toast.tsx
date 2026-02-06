@@ -68,7 +68,7 @@ export const Toast: React.FC<ToastProps> = ({
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 0,
+    top: 60,
     left: 0,
     right: 0,
     alignItems: 'center',
