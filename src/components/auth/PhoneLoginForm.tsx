@@ -5,12 +5,12 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
 } from 'react-native';
 import { Colors } from '@/theme';
-import { MyButton } from '@/components';
+import { MyButton, Toast } from '@/components';
 import { CountryCodePicker } from './CountryCodePicker';
 import { DEFAULT_COUNTRY, CountryCode } from '@/data/countryCodes';
+import { useSendSmsCodeMutation } from '@/store/api/authApi';
 
 interface PhoneLoginFormProps {
   onLogin: (phone: string, code: string) => Promise<void>;
@@ -24,7 +24,17 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
   const [activateCode, setActivateCode] = useState('');
   const [codeSent, setCodeSent] = useState(false);
   const [countdown, setCountdown] = useState(0);
-  const [isSending, setIsSending] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState<'success' | 'error'>('success');
+
+  const [sendSmsCode, { isLoading: isSending }] = useSendSmsCodeMutation();
+
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+    setToastMessage(message);
+    setToastType(type);
+    setToastVisible(true);
+  };
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -38,22 +48,19 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
     if (isSending) return;
 
     try {
-      setIsSending(true);
       const mobile = `${selectedCountry.code}${phone}`;
       console.log('發送驗證碼到手機:', mobile);
 
-      // TODO: 實際 API 調用
-      // const result = await authApi.sendVerificationCode(mobile);
-      await new Promise<void>((resolve) => setTimeout(() => resolve(), 500));
+      const result = await sendSmsCode({ mobile }).unwrap();
 
-      Alert.alert('成功', '驗證碼已發送');
-      setCodeSent(true);
-      setCountdown(60);
+      if (result.ok) {
+        showToast('驗證碼已發送', 'success');
+        setCodeSent(true);
+        setCountdown(60);
+      }
     } catch (error: any) {
       console.error('發送驗證碼失敗:', error);
-      Alert.alert('發送失敗', error.message || '請稍後再試');
-    } finally {
-      setIsSending(false);
+      showToast(error.message || '發送失敗，請稍後再試', 'error');
     }
   };
 
@@ -153,6 +160,15 @@ export const PhoneLoginForm: React.FC<PhoneLoginFormProps> = ({ onLogin }) => {
         selectedCode={selectedCountry.code}
         onSelect={setSelectedCountry}
         onClose={() => setShowPicker(false)}
+      />
+
+      {/* Toast 提示 */}
+      <Toast
+        message={toastMessage}
+        visible={toastVisible}
+        duration={3000}
+        type={toastType}
+        onHide={() => setToastVisible(false)}
       />
     </View>
   );

@@ -2,6 +2,17 @@ import { baseApi } from './baseApi';
 import Config from 'react-native-config';
 
 // 請求和回應的類型定義
+export interface SendSmsCodeRequest {
+  app_name: string;
+  mobile: string;
+  type: string;
+  t: number;
+}
+
+export interface SendSmsCodeResponse {
+  ok: boolean;
+}
+
 export interface RegisterMobileRequest {
   app_name: string;
   mobile: string;
@@ -51,6 +62,28 @@ const getAppName = (): string => {
 // 擴展 baseApi 添加認證相關的 endpoints
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // 發送手機驗證碼
+    sendSmsCode: builder.mutation<
+      SendSmsCodeResponse,
+      { mobile: string }
+    >({
+      query: ({ mobile }) => ({
+        url: '/v4/clients/mobile_sms_code',
+        method: 'POST',
+        body: {
+          app_name: getAppName(),
+          mobile,
+          type: 'mobile_login_verify_code',
+          t: 1,
+        },
+        headers: {
+          'accept': 'application/json, text/plain, */*',
+          'authorization': 'Bearer',
+          'token': '',
+        },
+      }),
+    }),
+
     // 手機驗證碼登入/註冊
     registerMobileWithCode: builder.mutation<
       RegisterMobileResponse,
@@ -78,4 +111,7 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 // 導出 hooks 供組件使用
-export const { useRegisterMobileWithCodeMutation } = authApi;
+export const {
+  useSendSmsCodeMutation,
+  useRegisterMobileWithCodeMutation
+} = authApi;
