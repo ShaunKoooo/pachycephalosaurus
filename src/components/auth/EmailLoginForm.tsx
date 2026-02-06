@@ -44,10 +44,7 @@ export const EmailLoginForm: React.FC<EmailLoginFormProps> = ({
       await dispatch(loginWithEmail({ email, password })).unwrap();
       // 登入成功後會自動導航到主頁，不顯示 Toast
     } catch (error: any) {
-      console.error('❌ Email 登入失敗:', error);
-      console.error('❌ Error type:', typeof error);
       const errorMessage = typeof error === 'string' ? error : (error?.message || '登入失敗，請檢查帳號密碼');
-      console.error('❌ 顯示 Toast:', errorMessage);
       showToast(errorMessage, 'error');
     } finally {
       setIsLoading(false);

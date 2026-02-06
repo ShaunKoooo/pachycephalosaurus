@@ -7,7 +7,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Alert,
   Animated,
 } from 'react-native';
 import { LoginFooter, EmailLoginForm, PhoneLoginForm } from '@/components/auth';
@@ -28,7 +27,6 @@ export default function LoginPage() {
   const [toastType, setToastType] = useState<'success' | 'error'>('success');
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
-    console.log('🔔 LoginPage.showToast called:', { message, type, currentVisible: toastVisible });
     setToastMessage(message);
     setToastType(type);
     setToastVisible(true);
@@ -37,16 +35,16 @@ export default function LoginPage() {
   const handlePhoneLogin = async (phone: string, verificationCode: string) => {
     try {
       await dispatch(loginWithPhone({ phone, verificationCode })).unwrap();
-      console.log('✅ 登入成功');
+      // 登入成功後會自動導航到主頁，不顯示 Toast
     } catch (error: any) {
-      console.error('❌ 登入失敗:', error);
-      Alert.alert('登入失敗', error || '請稍後再試');
+      const errorMessage = typeof error === 'string' ? error : (error?.message || '登入失敗，請稍後再試');
+      showToast(errorMessage, 'error');
     }
   };
 
   const handleForgotPassword = () => {
     // TODO: 導航到忘記密碼頁面
-    Alert.alert('提示', '忘記密碼功能開發中');
+    showToast('忘記密碼功能開發中', 'error');
   };
 
   useEffect(() => {
@@ -71,10 +69,6 @@ export default function LoginPage() {
     }
   }, [showSwitchIcon]);
 
-  useEffect(() => {
-    console.log('🔔 Toast state changed:', { toastVisible, toastMessage, toastType });
-  }, [toastVisible, toastMessage, toastType]);
-
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -92,7 +86,7 @@ export default function LoginPage() {
 
           {/* 登入表單 */}
           {loginMethod === 'phone' ? (
-            <PhoneLoginForm onLogin={handlePhoneLogin} />
+            <PhoneLoginForm onLogin={handlePhoneLogin} showToast={showToast} />
           ) : (
             <EmailLoginForm
               onForgotPassword={handleForgotPassword}
@@ -159,10 +153,7 @@ export default function LoginPage() {
         visible={toastVisible}
         duration={3000}
         type={toastType}
-        onHide={() => {
-          console.log('🔔 Toast onHide called');
-          setToastVisible(false);
-        }}
+        onHide={() => setToastVisible(false)}
       />
     </KeyboardAvoidingView>
   );
