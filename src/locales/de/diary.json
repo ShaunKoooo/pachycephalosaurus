@@ -1,59 +1,6 @@
 {
-  "title": "Diary",
-  "tabs": {
-    "food": "Food",
-    "exercise": "Exercise",
-    "weight": "Weight",
-    "water": "Water"
-  },
-  "food": {
-    "breakfast": "Breakfast",
-    "lunch": "Lunch",
-    "dinner": "Dinner",
-    "snacks": "Snacks",
-    "addFood": "Add Food",
-    "searchFood": "Search food...",
-    "calories": "{{count}} cal",
-    "protein": "Protein",
-    "carbs": "Carbs",
-    "fat": "Fat",
-    "emptyMeal": "No food logged",
-    "totalCalories": "Total Calories",
-    "remaining": "{{count}} cal remaining",
-    "over": "{{count}} cal over",
-    "macros": "Macros",
-    "servingSize": "Serving Size",
-    "quantity": "Quantity"
-  },
-  "exercise": {
-    "addExercise": "Add Exercise",
-    "searchExercise": "Search exercise...",
-    "duration": "Duration",
-    "caloriesBurned": "Calories Burned",
-    "noExercise": "No exercise logged",
-    "totalBurned": "Total Burned",
-    "cardio": "Cardio",
-    "strength": "Strength",
-    "flexibility": "Flexibility",
-    "sports": "Sports"
-  },
-  "weight": {
-    "logWeight": "Log Weight",
-    "currentWeight": "Current Weight",
-    "goalWeight": "Goal Weight",
-    "startWeight": "Start Weight",
-    "progress": "Progress",
-    "lost": "-{{amount}} {{unit}}",
-    "gained": "+{{amount}} {{unit}}",
-    "chart": "Weight Chart",
-    "noData": "No weight data yet"
-  },
-  "water": {
-    "addWater": "Add Water",
-    "goal": "Daily Goal",
-    "consumed": "Consumed",
-    "remaining": "Remaining",
-    "glassSize": "Glass Size",
-    "addGlass": "Add {{amount}} ml"
-  }
+  "title": "Tagebuch",
+  "today": "Heute",
+  "selectDateToView": "Wählen Sie ein Datum aus, um das Tagebuch anzuzeigen",
+  "selectedDate": "Ausgewähltes Datum"
 }
