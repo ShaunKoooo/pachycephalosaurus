@@ -12,7 +12,7 @@ export function DiaryStack() {
       <Stack.Screen
         name="DiaryScreen"
         component={DiaryScreen}
-        options={{ title: '日記' }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

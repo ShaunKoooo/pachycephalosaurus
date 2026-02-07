@@ -2,6 +2,7 @@ import React, { useRef, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { Colors } from '@/theme';
 import { useTranslation } from 'react-i18next';
+import { getLocalDateString } from '@/utils/dateHelpers';
 
 interface WeekStripProps {
   selectedDate: string;
@@ -32,7 +33,7 @@ const getWeekDates = (dateString: string) => {
 };
 
 const formatDate = (date: Date): string => {
-  return date.toISOString().split('T')[0];
+  return getLocalDateString(date);
 };
 
 const isSameDay = (date1: string, date2: string): boolean => {
