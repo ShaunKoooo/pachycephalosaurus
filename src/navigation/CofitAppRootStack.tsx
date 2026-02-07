@@ -12,6 +12,7 @@ import {
   NotificationsStack,
   CofitAppProfileStack,
 } from '@/navigation/stacks';
+import { OnboardingStack } from '@/navigation/stacks/cofitapp/onboarding';
 
 const Stack = createNativeStackNavigator<CofitAppRootStackParamList>();
 
@@ -21,6 +22,11 @@ export function CofitAppRootStack() {
       <Stack.Screen
         name="MainTabs"
         component={CofitAppTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="OnboardingStack"
+        component={OnboardingStack}
         options={{ headerShown: false }}
       />
       <Stack.Screen

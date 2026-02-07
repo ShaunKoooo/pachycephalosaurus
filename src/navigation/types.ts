@@ -1,6 +1,7 @@
 // CofitApp Root Stack（最外層 - Stack 包 Tab）
 export type CofitAppRootStackParamList = {
   MainTabs: undefined; // Tab Navigator
+  OnboardingStack: undefined; // 首次登入引導流程
   HomeStack: { id: string };
   DiaryStack: { id: string };
   ExpertStack: { id: string };
