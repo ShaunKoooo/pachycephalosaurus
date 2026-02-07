@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Linking } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 export const LoginFooter: React.FC = () => {
+  const { t } = useTranslation('auth');
   const handleReportIssue = () => {
     // TODO: 導航到問題回報頁面
     console.log('問題回報');
@@ -25,24 +27,24 @@ export const LoginFooter: React.FC = () => {
       {/* 問題回報 */}
       <TouchableOpacity style={styles.reportButton} onPress={handleReportIssue}>
         <Text style={styles.reportIcon}>⚠️</Text>
-        <Text style={styles.reportText}>問題回報</Text>
+        <Text style={styles.reportText}>{t('footer.reportIssue')}</Text>
       </TouchableOpacity>
 
       {/* 條款連結 */}
       <View style={styles.linksContainer}>
-        <Text style={styles.hintText}>繼續進行即表示您同意 </Text>
+        <Text style={styles.hintText}>{t('footer.agreeTerms')} </Text>
         <TouchableOpacity onPress={handleEULA}>
-          <Text style={styles.link}>使用者條款 (EULA)</Text>
+          <Text style={styles.link}>{t('footer.eula')}</Text>
         </TouchableOpacity>
-        <Text style={styles.hintText}>、</Text>
+        <Text style={styles.hintText}>{t('footer.separator')}</Text>
         <TouchableOpacity onPress={handlePrivacy}>
-          <Text style={styles.link}>隱私權政策</Text>
+          <Text style={styles.link}>{t('footer.privacy')}</Text>
         </TouchableOpacity>
       </View>
 
       {/* 版本號 */}
       <TouchableOpacity onPress={handleCheckUpdate}>
-        <Text style={styles.version}>v6.9.0-2026020303- 檢查程式更新</Text>
+        <Text style={styles.version}>v6.9.0-2026020303- {t('footer.checkUpdate')}</Text>
       </TouchableOpacity>
     </View>
   );
