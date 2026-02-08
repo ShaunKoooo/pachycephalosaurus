@@ -7,7 +7,10 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:auth": "jest --testPathPattern=\"auth\" --no-coverage"
   },
   "dependencies": {
     "@code-push-next/react-native-code-push": "^10.3.2",
@@ -42,6 +45,8 @@
     "@react-native/eslint-config": "0.83.1",
     "@react-native/metro-config": "0.83.1",
     "@react-native/typescript-config": "0.83.1",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^29.5.13",
     "@types/react": "^19.2.0",
     "@types/react-test-renderer": "^19.1.0",
