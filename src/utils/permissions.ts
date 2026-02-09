@@ -10,7 +10,7 @@ export async function hasAndroidPermission(): Promise<boolean> {
   }
 
   const getCheckPermissionPromise = () => {
-    if (Platform.Version >= 33) {
+    if (Number(Platform.Version) >= 33) {
       // Android 13+ (API 33+)
       return Promise.all([
         PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES),
@@ -31,7 +31,7 @@ export async function hasAndroidPermission(): Promise<boolean> {
   }
 
   const getRequestPermissionPromise = () => {
-    if (Platform.Version >= 33) {
+    if (Number(Platform.Version) >= 33) {
       // Android 13+ (API 33+)
       return PermissionsAndroid.requestMultiple([
         PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
