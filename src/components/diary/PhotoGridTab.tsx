@@ -10,10 +10,16 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { CameraRoll, PhotoIdentifier } from '@react-native-camera-roll/camera-roll';
+import {
+  CameraRoll,
+  PhotoIdentifier,
+  iosRefreshGallerySelection,
+  cameraRollEventEmitter,
+} from '@react-native-camera-roll/camera-roll';
 import { FontelloIcon } from '@/components';
 import { hasAndroidPermission, hasCameraPermission } from '@/utils/permissions';
 import { Colors } from '@/theme/Colors';
+import { Platform } from 'react-native';
 
 const { width } = Dimensions.get('window');
 const ITEM_SIZE = (width - 4) / 3; // 3 columns with 2px gaps
@@ -26,20 +32,48 @@ interface PhotoGridTabProps {
 export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabProps) {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [photos, setPhotos] = useState<PhotoIdentifier[]>([]);
+  const [manuallySelectedPhotos, setManuallySelectedPhotos] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  // Load photos from camera roll when tab becomes visible
+  // Load photos from camera roll when tab becomes visible or refreshKey changes
   useEffect(() => {
     if (visible) {
       loadPhotos();
     }
-  }, [visible]);
+  }, [visible, refreshKey]);
+
+  // Debug: Log when photos state changes
+  useEffect(() => {
+    console.log(`Photos state changed: ${photos.length} photos`);
+  }, [photos]);
+
+  // Listen for iOS photo library selection changes
+  useEffect(() => {
+    if (Platform.OS !== 'ios') return;
+
+    console.log('Setting up iOS photo library change listener...');
+    const subscription = cameraRollEventEmitter.addListener(
+      'onLibrarySelectionChange',
+      (event) => {
+        console.log('iOS photo library selection changed:', event);
+        // Reload photos when authorization list changes
+        loadPhotos();
+      }
+    );
+
+    return () => {
+      console.log('Removing iOS photo library change listener');
+      subscription.remove();
+    };
+  }, []);
 
   const loadPhotos = async () => {
     try {
       // Check permissions first
       const hasPermission = await hasAndroidPermission();
       if (!hasPermission) {
+        console.log('Permission denied for photo access');
         Alert.alert('權限被拒絕', '需要訪問相簿的權限才能選擇照片');
         return;
       }
@@ -52,7 +86,13 @@ export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabPro
         assetType: 'Photos',
       });
 
-      setPhotos(result.edges);
+      console.log(`Loaded ${result.edges.length} photos from camera roll`);
+      console.log('Photo URIs:', result.edges.map(e => e.node.image.uri));
+
+      // Force a new array reference to trigger re-render
+      setPhotos([...result.edges]);
+
+      console.log('Photos state updated, should trigger re-render');
     } catch (error) {
       console.error('Error loading photos:', error);
       Alert.alert('錯誤', '無法載入照片');
@@ -63,15 +103,40 @@ export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabPro
 
   const handleOpenGallery = async () => {
     try {
-      const result = await launchImageLibrary({
-        mediaType: 'photo',
-        selectionLimit: 0, // 0 means unlimited
-        quality: 0.8,
-      });
+      if (Platform.OS === 'ios') {
+        // On iOS, use the native Limited Library Picker
+        // This allows users to manage which photos are authorized for the app
+        const success = await iosRefreshGallerySelection();
+        console.log('iOS Limited Library Picker result:', success);
 
-      if (result.assets && result.assets.length > 0) {
-        const uris = result.assets.map(asset => asset.uri || '').filter(Boolean);
-        setSelectedImages(prev => [...prev, ...uris]);
+        if (success) {
+          // Give iOS a moment to update the authorization list
+          // Then trigger re-load by updating refreshKey
+          console.log('Waiting for iOS to update authorization list...');
+          setTimeout(() => {
+            console.log('Triggering photo reload via refreshKey...');
+            setRefreshKey(prev => prev + 1);
+          }, 100); // Very short delay, just enough for iOS to update
+        }
+      } else {
+        // On Android, use the standard image library picker
+        const result = await launchImageLibrary({
+          mediaType: 'photo',
+          selectionLimit: 0, // 0 means unlimited
+          quality: 0.8,
+        });
+
+        if (result.assets && result.assets.length > 0) {
+          const uris = result.assets.map(asset => asset.uri || '').filter(Boolean);
+          console.log(`User selected ${uris.length} photos from gallery picker:`, uris);
+          setSelectedImages(prev => [...prev, ...uris]);
+          setManuallySelectedPhotos(prev => [...prev, ...uris]);
+
+          // Reload photos from CameraRoll to get the updated list
+          // This ensures selected photos persist across sessions
+          console.log('Reloading photos after Android gallery selection...');
+          setRefreshKey(prev => prev + 1);
+        }
       }
     } catch (error) {
       console.error('Error opening gallery:', error);
@@ -133,6 +198,8 @@ export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabPro
     );
   }
 
+  console.log('Rendering PhotoGridTab with', photos.length, 'photos and', manuallySelectedPhotos.length, 'manually selected');
+
   return (
     <View style={styles.photoGrid}>
       {/* Action Buttons as Grid Items */}
@@ -158,14 +225,37 @@ export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabPro
         <Text style={styles.gridActionLabel}>拍照</Text>
       </TouchableOpacity>
 
-      {/* Photos */}
+      {/* Manually selected photos from gallery picker (shown first) */}
+      {manuallySelectedPhotos.map((uri, index) => {
+        const selectionNumber = getSelectionNumber(uri);
+        const isSelected = selectionNumber !== null;
+        return (
+          <TouchableOpacity
+            key={`manual-${index}`}
+            style={styles.photoItem}
+            onPress={() => handleToggleImage(uri)}
+            activeOpacity={0.9}
+          >
+            <Image source={{ uri }} style={styles.photoImage} />
+            <View style={styles.checkboxContainer}>
+              <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}>
+                {isSelected ? (
+                  <Text style={styles.selectionNumber}>{selectionNumber}</Text>
+                ) : null}
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      })}
+
+      {/* Photos from camera roll */}
       {photos.map((photo, index) => {
         const imageUri = photo.node.image.uri;
         const selectionNumber = getSelectionNumber(imageUri);
         const isSelected = selectionNumber !== null;
         return (
           <TouchableOpacity
-            key={index}
+            key={`photo-${index}`}
             style={styles.photoItem}
             onPress={() => handleToggleImage(imageUri)}
             activeOpacity={0.9}
