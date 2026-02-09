@@ -14,6 +14,7 @@ interface DiaryEntryModalProps {
   visible: boolean;
   onClose: () => void;
   onSelectCategory: (category: string) => void;
+  onOpenPhotoSelection?: (category: string) => void;
 }
 
 const categories = [
@@ -33,10 +34,21 @@ export default function DiaryEntryModal({
   visible,
   onClose,
   onSelectCategory,
+  onOpenPhotoSelection,
 }: DiaryEntryModalProps) {
+  // Categories that should open photo selection modal
+  const photoCategories = ['breakfast', 'lunch', 'dinner', 'snack', 'exercise', 'life', 'toilet', 'supplement'];
+
   const handleCategoryPress = (categoryId: string) => {
-    onSelectCategory(categoryId);
-    onClose();
+    // If category is food-related and we have a photo selection handler
+    if (photoCategories.includes(categoryId) && onOpenPhotoSelection) {
+      onOpenPhotoSelection(categoryId);
+      onClose();
+    } else {
+      // For non-food categories (water, body data, etc.)
+      onSelectCategory(categoryId);
+      onClose();
+    }
   };
 
   return (

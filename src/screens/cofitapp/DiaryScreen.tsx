@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { WeekStrip, CalendarModal } from '@/components/calendar';
-import { DiaryEntryModal } from '@/components/diary';
+import { DiaryEntryModal, PhotoSelectionModal } from '@/components/diary';
 import { setCalendarLocale } from '@/utils/calendarConfig';
 import { getTodayString } from '@/utils/dateHelpers';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +16,8 @@ export default function DiaryScreen() {
   const [selectedDate, setSelectedDate] = useState(() => getTodayString());
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [showEntryModal, setShowEntryModal] = useState(false);
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
   // Update calendar locale when app language changes
   useEffect(() => {
@@ -83,6 +85,22 @@ export default function DiaryScreen() {
     // TODO: Navigate to the appropriate screen based on category
   };
 
+  const handleOpenPhotoSelection = (category: string) => {
+    setSelectedCategory(category);
+    setShowPhotoModal(true);
+  };
+
+  const handlePhotoModalClose = () => {
+    setShowPhotoModal(false);
+    setSelectedCategory('');
+  };
+
+  const handleSelectPhoto = (uri: string) => {
+    console.log('Selected photo:', uri, 'for category:', selectedCategory);
+    // TODO: Navigate to diary entry form with photo
+    handlePhotoModalClose();
+  };
+
   // Example marked dates (you can replace this with your actual data)
   const markedDates = {
     // Add dots for dates with data
@@ -113,6 +131,15 @@ export default function DiaryScreen() {
         visible={showEntryModal}
         onClose={handleEntryModalClose}
         onSelectCategory={handleCategorySelect}
+        onOpenPhotoSelection={handleOpenPhotoSelection}
+      />
+
+      {/* Photo Selection Modal */}
+      <PhotoSelectionModal
+        visible={showPhotoModal}
+        onClose={handlePhotoModalClose}
+        onSelectPhoto={handleSelectPhoto}
+        category={selectedCategory}
       />
     </View>
   );
