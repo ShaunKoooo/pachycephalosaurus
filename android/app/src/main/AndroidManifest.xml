@@ -2,8 +2,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Camera permission (only needed if you declare it, then you must request it at runtime) -->
-    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+    <!-- Camera permission for taking photos -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Write external storage for saving photos (API < 29) -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
 
     <!-- Read external storage for selecting images/videos (API < 33) -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
