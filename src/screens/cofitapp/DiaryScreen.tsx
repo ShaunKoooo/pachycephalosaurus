@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { WeekStrip, CalendarModal } from '@/components/calendar';
+import { DiaryEntryModal } from '@/components/diary';
 import { setCalendarLocale } from '@/utils/calendarConfig';
 import { getTodayString } from '@/utils/dateHelpers';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +15,7 @@ export default function DiaryScreen() {
   const { t, i18n } = useTranslation('diary');
   const [selectedDate, setSelectedDate] = useState(() => getTodayString());
   const [showCalendarModal, setShowCalendarModal] = useState(false);
+  const [showEntryModal, setShowEntryModal] = useState(false);
 
   // Update calendar locale when app language changes
   useEffect(() => {
@@ -44,6 +46,15 @@ export default function DiaryScreen() {
           <FontelloIcon name="ic_date_range_24px" size={24} color={Colors.primary} />
         </TouchableOpacity>
       ),
+      headerRight: () => (
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={handleAddButtonPress}
+          activeOpacity={0.7}
+        >
+          <FontelloIcon name="ic_add_box_24px" size={24} color={Colors.primary} />
+        </TouchableOpacity>
+      ),
     });
   }, [navigation, selectedDate, t]);
 
@@ -57,6 +68,19 @@ export default function DiaryScreen() {
 
   const handleModalClose = () => {
     setShowCalendarModal(false);
+  };
+
+  const handleAddButtonPress = () => {
+    setShowEntryModal(true);
+  };
+
+  const handleEntryModalClose = () => {
+    setShowEntryModal(false);
+  };
+
+  const handleCategorySelect = (category: string) => {
+    console.log('Selected category:', category);
+    // TODO: Navigate to the appropriate screen based on category
   };
 
   // Example marked dates (you can replace this with your actual data)
@@ -82,6 +106,13 @@ export default function DiaryScreen() {
         onDateSelect={handleDateSelect}
         onClose={handleModalClose}
         markedDates={markedDates}
+      />
+
+      {/* Diary Entry Modal */}
+      <DiaryEntryModal
+        visible={showEntryModal}
+        onClose={handleEntryModalClose}
+        onSelectCategory={handleCategorySelect}
       />
     </View>
   );
@@ -119,5 +150,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 8,
+  },
+  addButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
   },
 });
