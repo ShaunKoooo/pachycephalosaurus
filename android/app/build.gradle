@@ -1,7 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
-apply from: "../../node_modules/@code-push-next/react-native-code-push/android/codepush.gradle"
 
 // Load env file based on flavor
 project.ext.envConfigFiles = [
@@ -12,6 +11,10 @@ project.ext.envConfigFiles = [
     cofitproDebug: ".env.cofitpro",
     cofitproRelease: ".env.cofitpro",
 ]
+
+// Apply react-native-config AFTER defining envConfigFiles
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply from: "../../node_modules/@code-push-next/react-native-code-push/android/codepush.gradle"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -191,6 +194,8 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    
+    implementation project(':react-native-config')
 
     // AndroidX Photo Picker support for API levels below 30
     implementation("androidx.activity:activity:1.9.+")
