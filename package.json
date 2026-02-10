@@ -10,7 +10,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:auth": "jest --testPathPattern=\"auth\" --no-coverage"
+    "test:auth": "jest --testPathPattern=\"auth\" --no-coverage",
+    "postinstall": "mkdir -p android/build/generated/autolinking && react-native config > android/build/generated/autolinking/autolinking.json"
   },
   "dependencies": {
     "@code-push-next/react-native-code-push": "^10.3.2",
