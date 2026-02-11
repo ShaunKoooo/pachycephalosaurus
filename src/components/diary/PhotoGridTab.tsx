@@ -163,6 +163,7 @@ export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabPro
         const uri = result.assets[0].uri;
         if (uri) {
           setSelectedImages(prev => [...prev, uri]);
+          setManuallySelectedPhotos(prev => [...prev, uri]);
           // Reload photos to show the newly taken photo
           loadPhotos();
         }
@@ -249,28 +250,30 @@ export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabPro
       })}
 
       {/* Photos from camera roll */}
-      {photos.map((photo, index) => {
-        const imageUri = photo.node.image.uri;
-        const selectionNumber = getSelectionNumber(imageUri);
-        const isSelected = selectionNumber !== null;
-        return (
-          <TouchableOpacity
-            key={`photo-${index}`}
-            style={styles.photoItem}
-            onPress={() => handleToggleImage(imageUri)}
-            activeOpacity={0.9}
-          >
-            <Image source={{ uri: imageUri }} style={styles.photoImage} />
-            <View style={styles.checkboxContainer}>
-              <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}>
-                {isSelected ? (
-                  <Text style={styles.selectionNumber}>{selectionNumber}</Text>
-                ) : null}
+      {photos
+        .filter(photo => !manuallySelectedPhotos.includes(photo.node.image.uri))
+        .map((photo, index) => {
+          const imageUri = photo.node.image.uri;
+          const selectionNumber = getSelectionNumber(imageUri);
+          const isSelected = selectionNumber !== null;
+          return (
+            <TouchableOpacity
+              key={`photo-${index}`}
+              style={styles.photoItem}
+              onPress={() => handleToggleImage(imageUri)}
+              activeOpacity={0.9}
+            >
+              <Image source={{ uri: imageUri }} style={styles.photoImage} />
+              <View style={styles.checkboxContainer}>
+                <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}>
+                  {isSelected ? (
+                    <Text style={styles.selectionNumber}>{selectionNumber}</Text>
+                  ) : null}
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        );
-      })}
+            </TouchableOpacity>
+          );
+        })}
     </View>
   );
 }
