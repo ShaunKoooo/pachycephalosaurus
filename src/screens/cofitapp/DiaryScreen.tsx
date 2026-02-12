@@ -3,7 +3,8 @@ import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { WeekStrip, CalendarModal } from '@/components/calendar';
-import { DiaryEntryModal, PhotoSelectionModal } from '@/components/diary';
+import { DiaryEntryModal, PhotoSelectionModal, FoodEntryModal } from '@/components/diary';
+import FoodCategoryModal, { FoodCategoryData } from '@/components/diary/FoodCategoryModal';
 import { setCalendarLocale } from '@/utils/calendarConfig';
 import { getTodayString } from '@/utils/dateHelpers';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +18,10 @@ export default function DiaryScreen() {
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [showEntryModal, setShowEntryModal] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [showFoodEntryModal, setShowFoodEntryModal] = useState(false);
+  const [showFoodCategoryModal, setShowFoodCategoryModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedPhotoUri, setSelectedPhotoUri] = useState<string | undefined>();
 
   // Update calendar locale when app language changes
   useEffect(() => {
@@ -97,8 +101,73 @@ export default function DiaryScreen() {
 
   const handleSelectPhoto = (uri: string) => {
     console.log('Selected photo:', uri, 'for category:', selectedCategory);
-    // TODO: Navigate to diary entry form with photo
-    handlePhotoModalClose();
+    setSelectedPhotoUri(uri);
+    setShowPhotoModal(false);
+    setShowFoodEntryModal(true);
+  };
+
+  const handleSkipPhotoSelection = () => {
+    setSelectedPhotoUri(undefined);
+    setShowPhotoModal(false);
+    setShowFoodEntryModal(true);
+  };
+
+  const handleFoodEntryModalClose = () => {
+    setShowFoodEntryModal(false);
+    setSelectedCategory('');
+    setSelectedPhotoUri(undefined);
+  };
+
+  const handleFoodEntryBack = () => {
+    setShowFoodEntryModal(false);
+    setShowPhotoModal(true);
+  };
+
+  const handleFoodEntryNext = (data: { photoUri?: string; notes: string }) => {
+    console.log('Food entry data:', data);
+    // TODO: Save data to database
+    handleFoodEntryModalClose();
+  };
+
+  const handleOpenFoodCategory = () => {
+    setShowFoodEntryModal(false);
+    setShowFoodCategoryModal(true);
+  };
+
+  const handleFoodCategoryModalClose = () => {
+    setShowFoodCategoryModal(false);
+    setShowFoodEntryModal(true);
+  };
+
+  const handleFoodCategoryModalSave = (data: FoodCategoryData) => {
+    console.log('Food category data saved:', data);
+    setShowFoodCategoryModal(false);
+    setShowFoodEntryModal(true);
+    // TODO: Store the food category data
+  };
+
+  // Helper function to get category label
+  const getCategoryLabel = (category: string): string => {
+    const labels: Record<string, string> = {
+      breakfast: '早餐',
+      lunch: '午餐',
+      dinner: '晚餐',
+      snack: '點心',
+      exercise: '運動',
+      life: '生活',
+      water: '飲水',
+      toilet: '上廁所',
+      body: '身體數據',
+      supplement: '保健品',
+    };
+    return labels[category] || category;
+  };
+
+  // Helper function to format date for display (MM/DD format)
+  const formatDateForDisplay = (date: string): string => {
+    // date format is YYYY-MM-DD, we want MM/DD
+    const [, month, day] = date.split('-');
+    return `${month}/${day}`;
   };
 
   // Example marked dates (you can replace this with your actual data)
@@ -139,7 +208,30 @@ export default function DiaryScreen() {
         visible={showPhotoModal}
         onClose={handlePhotoModalClose}
         onSelectPhoto={handleSelectPhoto}
+        onSkip={handleSkipPhotoSelection}
         category={selectedCategory}
+      />
+
+      {/* Food Entry Modal */}
+      <FoodEntryModal
+        visible={showFoodEntryModal}
+        onClose={handleFoodEntryModalClose}
+        onNext={handleFoodEntryNext}
+        onBack={handleFoodEntryBack}
+        category={selectedCategory}
+        categoryLabel={getCategoryLabel(selectedCategory)}
+        date={formatDateForDisplay(selectedDate)}
+        selectedPhotoUri={selectedPhotoUri}
+        onOpenFoodCategory={handleOpenFoodCategory}
+      />
+
+      {/* Food Category Modal */}
+      <FoodCategoryModal
+        visible={showFoodCategoryModal}
+        onClose={handleFoodCategoryModalClose}
+        onSave={handleFoodCategoryModalSave}
+        photoUri={selectedPhotoUri}
+        mealLabel={getCategoryLabel(selectedCategory)}
       />
     </View>
   );

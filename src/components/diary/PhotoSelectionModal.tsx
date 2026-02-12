@@ -9,12 +9,14 @@ import {
 } from 'react-native';
 import { FontelloIcon } from '@/components';
 import PhotoGridTab from './PhotoGridTab';
+import { Colors } from '@/theme';
 
 interface PhotoSelectionModalProps {
   visible: boolean;
   onClose: () => void;
   onSelectPhoto: (uri: string) => void;
   category: string;
+  onSkip?: () => void;
 }
 
 type TabType = 'photos' | 'videos' | 'recent' | 'draft';
@@ -24,6 +26,7 @@ export default function PhotoSelectionModal({
   onClose,
   onSelectPhoto,
   category,
+  onSkip,
 }: PhotoSelectionModalProps) {
   const [selectedTab, setSelectedTab] = useState<TabType>('photos');
 
@@ -35,7 +38,11 @@ export default function PhotoSelectionModal({
   ];
 
   const handleSkip = () => {
-    onClose();
+    if (onSkip) {
+      onSkip();
+    } else {
+      onClose();
+    }
   };
 
   return (
@@ -50,11 +57,11 @@ export default function PhotoSelectionModal({
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity
-            style={styles.headerButton}
+            style={[styles.headerButton, { backgroundColor: Colors.diaryHeaderButtonBackground, borderRadius: 100, width: 40 }]}
             onPress={onClose}
             activeOpacity={0.7}
           >
-            <FontelloIcon name="ic_close_24px" size={28} color="#000000" />
+            <FontelloIcon name="ic_close_24px" size={28} color={Colors.diaryHeaderButtonIcon} />
           </TouchableOpacity>
 
           <Text style={styles.headerTitle}>選擇影像</Text>
