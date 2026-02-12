@@ -22,6 +22,7 @@ interface FoodEntryModalProps {
   categoryLabel: string;
   date: string;
   selectedPhotoUri?: string;
+  onOpenFoodCategory?: () => void;
 }
 
 export interface FoodEntryData {
@@ -38,6 +39,7 @@ export default function FoodEntryModal({
   categoryLabel,
   date,
   selectedPhotoUri,
+  onOpenFoodCategory,
 }: FoodEntryModalProps) {
   const [photoCards, setPhotoCards] = useState<PhotoCard[]>([
     { id: '1', photoUri: selectedPhotoUri, title: '食物名稱', cardCount: 0 },
@@ -79,8 +81,9 @@ export default function FoodEntryModal({
   };
 
   const handleButtonApp = () => {
-    // TODO: Implement ButtonApp integration
-    console.log('ButtonApp pressed');
+    if (onOpenFoodCategory) {
+      onOpenFoodCategory();
+    }
   };
 
   const handleFoodDatabase = () => {

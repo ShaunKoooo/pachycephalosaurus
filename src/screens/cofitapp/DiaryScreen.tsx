@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { WeekStrip, CalendarModal } from '@/components/calendar';
 import { DiaryEntryModal, PhotoSelectionModal, FoodEntryModal } from '@/components/diary';
+import FoodCategoryModal, { FoodCategoryData } from '@/components/diary/FoodCategoryModal';
 import { setCalendarLocale } from '@/utils/calendarConfig';
 import { getTodayString } from '@/utils/dateHelpers';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ export default function DiaryScreen() {
   const [showEntryModal, setShowEntryModal] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [showFoodEntryModal, setShowFoodEntryModal] = useState(false);
+  const [showFoodCategoryModal, setShowFoodCategoryModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedPhotoUri, setSelectedPhotoUri] = useState<string | undefined>();
 
@@ -127,6 +129,23 @@ export default function DiaryScreen() {
     handleFoodEntryModalClose();
   };
 
+  const handleOpenFoodCategory = () => {
+    setShowFoodEntryModal(false);
+    setShowFoodCategoryModal(true);
+  };
+
+  const handleFoodCategoryModalClose = () => {
+    setShowFoodCategoryModal(false);
+    setShowFoodEntryModal(true);
+  };
+
+  const handleFoodCategoryModalSave = (data: FoodCategoryData) => {
+    console.log('Food category data saved:', data);
+    setShowFoodCategoryModal(false);
+    setShowFoodEntryModal(true);
+    // TODO: Store the food category data
+  };
+
   // Helper function to get category label
   const getCategoryLabel = (category: string): string => {
     const labels: Record<string, string> = {
@@ -203,6 +222,16 @@ export default function DiaryScreen() {
         categoryLabel={getCategoryLabel(selectedCategory)}
         date={formatDateForDisplay(selectedDate)}
         selectedPhotoUri={selectedPhotoUri}
+        onOpenFoodCategory={handleOpenFoodCategory}
+      />
+
+      {/* Food Category Modal */}
+      <FoodCategoryModal
+        visible={showFoodCategoryModal}
+        onClose={handleFoodCategoryModalClose}
+        onSave={handleFoodCategoryModalSave}
+        photoUri={selectedPhotoUri}
+        mealLabel={getCategoryLabel(selectedCategory)}
       />
     </View>
   );
