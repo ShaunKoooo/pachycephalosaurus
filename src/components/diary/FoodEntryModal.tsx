@@ -109,11 +109,11 @@ export default function FoodEntryModal({
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity
-            style={styles.headerButton}
+            style={[styles.headerButton, { backgroundColor: Colors.diaryHeaderButtonBackground, borderRadius: 100, width: 40 }]}
             onPress={handleBack}
             activeOpacity={0.7}
           >
-            <FontelloIcon name="ic_keyboard_arrow_left_24px" size={28} color="#000000" />
+            <FontelloIcon name="ic_keyboard_arrow_left_24px" size={28} color={Colors.diaryHeaderButtonIcon} />
           </TouchableOpacity>
 
           <Text style={styles.headerTitle}>{date} {categoryLabel}</Text>

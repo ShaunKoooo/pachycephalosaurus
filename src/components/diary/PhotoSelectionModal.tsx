@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { FontelloIcon } from '@/components';
 import PhotoGridTab from './PhotoGridTab';
+import { Colors } from '@/theme';
 
 interface PhotoSelectionModalProps {
   visible: boolean;
@@ -56,11 +57,11 @@ export default function PhotoSelectionModal({
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity
-            style={styles.headerButton}
+            style={[styles.headerButton, { backgroundColor: Colors.diaryHeaderButtonBackground, borderRadius: 100, width: 40 }]}
             onPress={onClose}
             activeOpacity={0.7}
           >
-            <FontelloIcon name="ic_close_24px" size={28} color="#000000" />
+            <FontelloIcon name="ic_close_24px" size={28} color={Colors.diaryHeaderButtonIcon} />
           </TouchableOpacity>
 
           <Text style={styles.headerTitle}>選擇影像</Text>
