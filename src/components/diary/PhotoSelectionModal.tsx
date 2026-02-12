@@ -29,6 +29,7 @@ export default function PhotoSelectionModal({
   onSkip,
 }: PhotoSelectionModalProps) {
   const [selectedTab, setSelectedTab] = useState<TabType>('photos');
+  const [selectedImagesCount, setSelectedImagesCount] = useState(0);
 
   const tabs = [
     { id: 'photos' as TabType, label: '照片' },
@@ -71,7 +72,9 @@ export default function PhotoSelectionModal({
             onPress={handleSkip}
             activeOpacity={0.7}
           >
-            <Text style={styles.skipText}>略過</Text>
+            <Text style={styles.skipText}>
+              {selectedImagesCount > 0 ? '下一步' : '略過'}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -102,7 +105,11 @@ export default function PhotoSelectionModal({
         {/* Content */}
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           {selectedTab === 'photos' ? (
-            <PhotoGridTab visible={visible && selectedTab === 'photos'} onSelectPhoto={onSelectPhoto} />
+            <PhotoGridTab
+              visible={visible && selectedTab === 'photos'}
+              onSelectPhoto={onSelectPhoto}
+              onSelectionChange={setSelectedImagesCount}
+            />
           ) : (
             <View style={styles.placeholderContainer}>
               <Text style={styles.placeholderText}>此功能尚未實作</Text>
@@ -143,7 +150,7 @@ const styles = StyleSheet.create({
   skipText: {
     fontSize: 17,
     fontWeight: '400',
-    color: '#007AFF',
+    color: 'black',
   },
   tabsContainer: {
     flexDirection: 'row',

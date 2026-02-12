@@ -27,9 +27,10 @@ const ITEM_SIZE = (width - 4) / 3; // 3 columns with 2px gaps
 interface PhotoGridTabProps {
   visible: boolean;
   onSelectPhoto: (uri: string) => void;
+  onSelectionChange?: (count: number) => void;
 }
 
-export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabProps) {
+export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange }: PhotoGridTabProps) {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [photos, setPhotos] = useState<PhotoIdentifier[]>([]);
   const [manuallySelectedPhotos, setManuallySelectedPhotos] = useState<string[]>([]);
@@ -67,6 +68,13 @@ export default function PhotoGridTab({ visible, onSelectPhoto }: PhotoGridTabPro
       subscription.remove();
     };
   }, []);
+
+  // Notify parent component when selection changes
+  useEffect(() => {
+    if (onSelectionChange) {
+      onSelectionChange(selectedImages.length);
+    }
+  }, [selectedImages, onSelectionChange]);
 
   const loadPhotos = async () => {
     try {
