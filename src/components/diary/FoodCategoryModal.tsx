@@ -117,12 +117,11 @@ export default function FoodCategoryModal({
       onRequestClose={onClose}
       presentationStyle="pageSheet"
       transparent={false}
-      statusBarTranslucent={true}
     >
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={'padding'}
         style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 20}
       >
         <LinearGradient
           colors={['#FFFFFF', '#E6EEEE']}
@@ -131,184 +130,184 @@ export default function FoodCategoryModal({
         >
           {/* Header */}
           <View style={styles.header}>
-          <TouchableOpacity
-            style={[styles.headerButton, { backgroundColor: Colors.diaryHeaderButtonBackground, borderRadius: 100, width: 40 }]}
-            onPress={onClose}
-            activeOpacity={0.7}
-          >
-            <FontelloIcon name="ic_keyboard_arrow_left_24px" size={28} color={Colors.diaryHeaderButtonIcon} />
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.headerButton, { backgroundColor: Colors.diaryHeaderButtonBackground, borderRadius: 100, width: 40 }]}
+              onPress={onClose}
+              activeOpacity={0.7}
+            >
+              <FontelloIcon name="ic_keyboard_arrow_left_24px" size={28} color={Colors.diaryHeaderButtonIcon} />
+            </TouchableOpacity>
 
-          <Text style={styles.headerTitle}>六大類編輯</Text>
+            <Text style={styles.headerTitle}>六大類編輯</Text>
 
-          <TouchableOpacity
-            style={{ marginRight: 8 }}
-            onPress={handleSave}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.saveText}>儲存</Text>
-          </TouchableOpacity>
-        </View>
-
-        <ScrollView
-          style={styles.content}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainer}
-        >
-          {/* Photo Section */}
-          {photoUri ? (
-            <View style={styles.photoContainer}>
-              <Image source={{ uri: photoUri }} style={styles.photo} resizeMode="cover" />
-            </View>
-          ) :
-            <View style={styles.photoContainer}>
-              <View style={styles.photo}>
-                <Text>123</Text>
-              </View>
-            </View>
-          }
-
-          {/* Meal Label */}
-          <View style={styles.mealLabelContainer}>
-            <TextInput
-              style={styles.mealLabel}
-              multiline
-            >{mealLabel}123</TextInput>
+            <TouchableOpacity
+              style={{ marginRight: 8 }}
+              onPress={handleSave}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.saveText}>儲存</Text>
+            </TouchableOpacity>
           </View>
 
-          {/* Food Categories Grid */}
-          <View>
-            {/* Row 1: Fruit, Vegetable, Grain */}
-            <View style={styles.categoryRow}>
-              <View style={styles.categoryItem}>
-                <CategoryIcon type="fruit" />
-                <Text style={styles.categoryLabel}>水果</Text>
-                <TextInput
-                  style={styles.servingInput}
-                  placeholder="份數"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={fruitServings}
-                  onChangeText={setFruitServings}
-                />
+          <ScrollView
+            style={styles.content}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.contentContainer}
+          >
+            {/* Photo Section */}
+            {photoUri ? (
+              <View style={styles.photoContainer}>
+                <Image source={{ uri: photoUri }} style={styles.photo} resizeMode="cover" />
               </View>
+            ) :
+              <View style={styles.photoContainer}>
+                <View style={styles.photo}>
+                  <Text>123</Text>
+                </View>
+              </View>
+            }
 
-              <View style={styles.categoryItem}>
-                <CategoryIcon type="vegetable" />
-                <Text style={styles.categoryLabel}>蔬菜</Text>
-                <TextInput
-                  style={styles.servingInput}
-                  placeholder="份數"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={vegetableServings}
-                  onChangeText={setVegetableServings}
-                />
-              </View>
-
-              <View style={styles.categoryItem}>
-                <CategoryIcon type="grain" />
-                <Text style={styles.categoryLabel}>全穀雜糧</Text>
-                <TextInput
-                  style={styles.servingInput}
-                  placeholder="份數"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={grainServings}
-                  onChangeText={setGrainServings}
-                />
-              </View>
+            {/* Meal Label */}
+            <View style={styles.mealLabelContainer}>
+              <TextInput
+                style={styles.mealLabel}
+                multiline
+              >{mealLabel}123</TextInput>
             </View>
 
-            {/* Row 2: Protein, Dairy, Oil */}
-            <View style={styles.categoryRow}>
-              {/* Protein Section with sub-options */}
-              <View style={styles.categoryItem}>
-                <CategoryIcon type="meat" />
-                <Text style={styles.categoryLabel}>豆魚蛋肉</Text>
-                <TextInput
-                  style={styles.servingInputSmall}
-                  placeholder="低脂"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={proteinLowFat}
-                  onChangeText={setProteinLowFat}
-                />
-                <TextInput
-                  style={styles.servingInputSmall}
-                  placeholder="中脂"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={proteinMediumFat}
-                  onChangeText={setProteinMediumFat}
-                />
-                <TextInput
-                  style={styles.servingInputSmall}
-                  placeholder="高脂"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={proteinHighFat}
-                  onChangeText={setProteinHighFat}
-                />
-                <TextInput
-                  style={styles.servingInputSmall}
-                  placeholder="超高脂"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={proteinUltraHighFat}
-                  onChangeText={setProteinUltraHighFat}
-                />
+            {/* Food Categories Grid */}
+            <View>
+              {/* Row 1: Fruit, Vegetable, Grain */}
+              <View style={styles.categoryRow}>
+                <View style={styles.categoryItem}>
+                  <CategoryIcon type="fruit" />
+                  <Text style={styles.categoryLabel}>水果</Text>
+                  <TextInput
+                    style={styles.servingInput}
+                    placeholder="份數"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={fruitServings}
+                    onChangeText={setFruitServings}
+                  />
+                </View>
+
+                <View style={styles.categoryItem}>
+                  <CategoryIcon type="vegetable" />
+                  <Text style={styles.categoryLabel}>蔬菜</Text>
+                  <TextInput
+                    style={styles.servingInput}
+                    placeholder="份數"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={vegetableServings}
+                    onChangeText={setVegetableServings}
+                  />
+                </View>
+
+                <View style={styles.categoryItem}>
+                  <CategoryIcon type="grain" />
+                  <Text style={styles.categoryLabel}>全穀雜糧</Text>
+                  <TextInput
+                    style={styles.servingInput}
+                    placeholder="份數"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={grainServings}
+                    onChangeText={setGrainServings}
+                  />
+                </View>
               </View>
 
-              {/* Dairy Section with sub-options */}
-              <View style={styles.categoryItem}>
-                <CategoryIcon type="milk" />
-                <Text style={styles.categoryLabel}>乳品</Text>
-                <TextInput
-                  style={styles.servingInputSmall}
-                  placeholder="脫脂"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={dairySkimmed}
-                  onChangeText={setDairySkimmed}
-                />
-                <TextInput
-                  style={styles.servingInputSmall}
-                  placeholder="低脂"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={dairyLowFat}
-                  onChangeText={setDairyLowFat}
-                />
-                <TextInput
-                  style={styles.servingInputSmall}
-                  placeholder="全脂"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={dairyFullFat}
-                  onChangeText={setDairyFullFat}
-                />
-              </View>
+              {/* Row 2: Protein, Dairy, Oil */}
+              <View style={styles.categoryRow}>
+                {/* Protein Section with sub-options */}
+                <View style={styles.categoryItem}>
+                  <CategoryIcon type="meat" />
+                  <Text style={styles.categoryLabel}>豆魚蛋肉</Text>
+                  <TextInput
+                    style={styles.servingInputSmall}
+                    placeholder="低脂"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={proteinLowFat}
+                    onChangeText={setProteinLowFat}
+                  />
+                  <TextInput
+                    style={styles.servingInputSmall}
+                    placeholder="中脂"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={proteinMediumFat}
+                    onChangeText={setProteinMediumFat}
+                  />
+                  <TextInput
+                    style={styles.servingInputSmall}
+                    placeholder="高脂"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={proteinHighFat}
+                    onChangeText={setProteinHighFat}
+                  />
+                  <TextInput
+                    style={styles.servingInputSmall}
+                    placeholder="超高脂"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={proteinUltraHighFat}
+                    onChangeText={setProteinUltraHighFat}
+                  />
+                </View>
 
-              {/* Oil Section */}
-              <View style={styles.categoryItem}>
-                <CategoryIcon type="oil" />
-                <Text style={styles.categoryLabel}>油脂</Text>
-                <TextInput
-                  style={styles.servingInput}
-                  placeholder="份數"
-                  placeholderTextColor="#CCCCCC"
-                  keyboardType="numeric"
-                  value={oilServings}
-                  onChangeText={setOilServings}
-                />
+                {/* Dairy Section with sub-options */}
+                <View style={styles.categoryItem}>
+                  <CategoryIcon type="milk" />
+                  <Text style={styles.categoryLabel}>乳品</Text>
+                  <TextInput
+                    style={styles.servingInputSmall}
+                    placeholder="脫脂"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={dairySkimmed}
+                    onChangeText={setDairySkimmed}
+                  />
+                  <TextInput
+                    style={styles.servingInputSmall}
+                    placeholder="低脂"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={dairyLowFat}
+                    onChangeText={setDairyLowFat}
+                  />
+                  <TextInput
+                    style={styles.servingInputSmall}
+                    placeholder="全脂"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={dairyFullFat}
+                    onChangeText={setDairyFullFat}
+                  />
+                </View>
+
+                {/* Oil Section */}
+                <View style={styles.categoryItem}>
+                  <CategoryIcon type="oil" />
+                  <Text style={styles.categoryLabel}>油脂</Text>
+                  <TextInput
+                    style={styles.servingInput}
+                    placeholder="份數"
+                    placeholderTextColor="#CCCCCC"
+                    keyboardType="numeric"
+                    value={oilServings}
+                    onChangeText={setOilServings}
+                  />
+                </View>
               </View>
             </View>
-          </View>
-        </ScrollView>
-      </LinearGradient>
+          </ScrollView>
+        </LinearGradient>
       </KeyboardAvoidingView>
-    </Modal>
+    </Modal >
   );
 }
 
