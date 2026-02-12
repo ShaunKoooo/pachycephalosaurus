@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,22 @@ import {
   Modal,
   TouchableOpacity,
   ScrollView,
+  Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { FontelloIcon } from '@/components';
 import PhotoGridTab from './PhotoGridTab';
 import { Colors } from '@/theme';
+import { useLazyGetMediaUploadInfoQuery } from '@/store/api/mediaApi';
+import { uploadMultipleImages } from '@/utils/imageUpload';
+import { Asset } from 'react-native-image-picker';
+
+interface SelectedImageData {
+  uri: string;
+  fileName?: string;
+  type?: string;
+  fileSize?: number;
+}
 
 interface PhotoSelectionModalProps {
   visible: boolean;
@@ -17,6 +29,7 @@ interface PhotoSelectionModalProps {
   onSelectPhoto: (uri: string) => void;
   category: string;
   onSkip?: () => void;
+  onUploadComplete?: (urls: string[]) => void;
 }
 
 type TabType = 'photos' | 'videos' | 'recent' | 'draft';
@@ -27,9 +40,15 @@ export default function PhotoSelectionModal({
   onSelectPhoto,
   category,
   onSkip,
+  onUploadComplete,
 }: PhotoSelectionModalProps) {
   const [selectedTab, setSelectedTab] = useState<TabType>('photos');
   const [selectedImagesCount, setSelectedImagesCount] = useState(0);
+  const [selectedImages, setSelectedImages] = useState<SelectedImageData[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState({ completed: 0, total: 0 });
+
+  const [getUploadInfo] = useLazyGetMediaUploadInfoQuery();
 
   const tabs = [
     { id: 'photos' as TabType, label: '照片' },
@@ -38,11 +57,74 @@ export default function PhotoSelectionModal({
     { id: 'draft' as TabType, label: '草稿' },
   ];
 
-  const handleSkip = () => {
-    if (onSkip) {
-      onSkip();
-    } else {
+  const handleSelectionChange = useCallback((count: number, images: SelectedImageData[]) => {
+    setSelectedImagesCount(count);
+    setSelectedImages(images);
+  }, []);
+
+  const handleNextStep = async () => {
+    if (selectedImagesCount === 0) {
+      // 沒有選擇圖片，直接略過
+      if (onSkip) {
+        onSkip();
+      } else {
+        onClose();
+      }
+      return;
+    }
+
+    // 開始上傳圖片
+    try {
+      setIsUploading(true);
+      setUploadProgress({ completed: 0, total: selectedImages.length });
+
+      // 將 SelectedImageData 轉換為 Asset 格式
+      const assets: Asset[] = selectedImages.map(img => ({
+        uri: img.uri,
+        fileName: img.fileName,
+        type: img.type,
+        fileSize: img.fileSize,
+      }));
+
+      // 批次上傳圖片
+      const uploadedUrls = await uploadMultipleImages(
+        assets,
+        async (params) => {
+          const response = await getUploadInfo(params);
+          if (response.error) {
+            throw new Error('Failed to get upload info');
+          }
+          return response.data!;
+        },
+        (completed, total) => {
+          setUploadProgress({ completed, total });
+        },
+      );
+
+      if (uploadedUrls.length === 0) {
+        Alert.alert('上傳失敗', '所有圖片上傳失敗，請重試');
+        return;
+      }
+
+      if (uploadedUrls.length < selectedImages.length) {
+        Alert.alert(
+          '部分上傳成功',
+          `成功上傳 ${uploadedUrls.length} / ${selectedImages.length} 張圖片`,
+        );
+      }
+
+      // 通知父組件上傳完成
+      if (onUploadComplete) {
+        onUploadComplete(uploadedUrls);
+      }
+
+      // 關閉 Modal
       onClose();
+    } catch (error) {
+      console.error('Upload error:', error);
+      Alert.alert('上傳失敗', '圖片上傳時發生錯誤，請重試');
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -69,12 +151,19 @@ export default function PhotoSelectionModal({
 
           <TouchableOpacity
             style={styles.headerButton}
-            onPress={handleSkip}
+            onPress={handleNextStep}
             activeOpacity={0.7}
+            disabled={isUploading}
           >
-            <Text style={styles.skipText}>
-              {selectedImagesCount > 0 ? '下一步' : '略過'}
-            </Text>
+            {isUploading ? (
+              <View style={styles.uploadingContainer}>
+                <ActivityIndicator size="small" color="black" />
+              </View>
+            ) : (
+              <Text style={styles.skipText}>
+                {selectedImagesCount > 0 ? '下一步' : '略過'}
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
 
@@ -108,7 +197,7 @@ export default function PhotoSelectionModal({
             <PhotoGridTab
               visible={visible && selectedTab === 'photos'}
               onSelectPhoto={onSelectPhoto}
-              onSelectionChange={setSelectedImagesCount}
+              onSelectionChange={handleSelectionChange}
             />
           ) : (
             <View style={styles.placeholderContainer}>
@@ -116,6 +205,18 @@ export default function PhotoSelectionModal({
             </View>
           )}
         </ScrollView>
+
+        {/* Upload Progress Overlay */}
+        {isUploading && (
+          <View style={styles.uploadOverlay}>
+            <View style={styles.uploadCard}>
+              <ActivityIndicator size="large" color={Colors.primary} />
+              <Text style={styles.uploadText}>
+                上傳中... {uploadProgress.completed} / {uploadProgress.total}
+              </Text>
+            </View>
+          </View>
+        )}
       </View>
     </Modal>
   );
@@ -188,5 +289,34 @@ const styles = StyleSheet.create({
   placeholderText: {
     fontSize: 16,
     color: '#999999',
+  },
+  uploadingContainer: {
+    width: 60,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  uploadOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  uploadCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 24,
+    alignItems: 'center',
+    minWidth: 200,
+  },
+  uploadText: {
+    marginTop: 16,
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#000000',
   },
 });

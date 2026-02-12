@@ -9,7 +9,7 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary, Asset } from 'react-native-image-picker';
 import {
   CameraRoll,
   PhotoIdentifier,
@@ -24,16 +24,23 @@ import { Platform } from 'react-native';
 const { width } = Dimensions.get('window');
 const ITEM_SIZE = (width - 4) / 3; // 3 columns with 2px gaps
 
+interface SelectedImageData {
+  uri: string;
+  fileName?: string;
+  type?: string;
+  fileSize?: number;
+}
+
 interface PhotoGridTabProps {
   visible: boolean;
   onSelectPhoto: (uri: string) => void;
-  onSelectionChange?: (count: number) => void;
+  onSelectionChange?: (count: number, selectedImages: SelectedImageData[]) => void;
 }
 
 export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange }: PhotoGridTabProps) {
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [selectedImagesMap, setSelectedImagesMap] = useState<Map<string, SelectedImageData>>(new Map());
   const [photos, setPhotos] = useState<PhotoIdentifier[]>([]);
-  const [manuallySelectedPhotos, setManuallySelectedPhotos] = useState<string[]>([]);
+  const [manuallySelectedPhotos, setManuallySelectedPhotos] = useState<SelectedImageData[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -72,9 +79,10 @@ export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange
   // Notify parent component when selection changes
   useEffect(() => {
     if (onSelectionChange) {
-      onSelectionChange(selectedImages.length);
+      const selectedImageArray = Array.from(selectedImagesMap.values());
+      onSelectionChange(selectedImagesMap.size, selectedImageArray);
     }
-  }, [selectedImages, onSelectionChange]);
+  }, [selectedImagesMap, onSelectionChange]);
 
   const loadPhotos = async () => {
     try {
@@ -135,10 +143,15 @@ export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange
         });
 
         if (result.assets && result.assets.length > 0) {
-          const uris = result.assets.map(asset => asset.uri || '').filter(Boolean);
-          console.log(`User selected ${uris.length} photos from gallery picker:`, uris);
-          setSelectedImages(prev => [...prev, ...uris]);
-          setManuallySelectedPhotos(prev => [...prev, ...uris]);
+          const imageDataList: SelectedImageData[] = result.assets.map(asset => ({
+            uri: asset.uri || '',
+            fileName: asset.fileName,
+            type: asset.type,
+            fileSize: asset.fileSize,
+          })).filter(data => data.uri);
+
+          console.log(`User selected ${imageDataList.length} photos from gallery picker:`, imageDataList.map(d => d.uri));
+          setManuallySelectedPhotos(prev => [...prev, ...imageDataList]);
 
           // Reload photos from CameraRoll to get the updated list
           // This ensures selected photos persist across sessions
@@ -168,10 +181,16 @@ export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange
       });
 
       if (result.assets && result.assets.length > 0) {
-        const uri = result.assets[0].uri;
+        const asset = result.assets[0];
+        const uri = asset.uri;
         if (uri) {
-          setSelectedImages(prev => [...prev, uri]);
-          setManuallySelectedPhotos(prev => [...prev, uri]);
+          const imageData: SelectedImageData = {
+            uri,
+            fileName: asset.fileName,
+            type: asset.type,
+            fileSize: asset.fileSize,
+          };
+          setManuallySelectedPhotos(prev => [...prev, imageData]);
           // Reload photos to show the newly taken photo
           loadPhotos();
         }
@@ -182,19 +201,26 @@ export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange
     }
   };
 
-  const handleToggleImage = (uri: string) => {
-    setSelectedImages(prev => {
-      if (prev.includes(uri)) {
+  const handleToggleImage = (imageData: SelectedImageData) => {
+    setSelectedImagesMap(prev => {
+      const newMap = new Map(prev);
+      const uri = imageData.uri;
+
+      if (newMap.has(uri)) {
         // Remove from selection
-        return prev.filter(item => item !== uri);
+        newMap.delete(uri);
+      } else {
+        // Add to selection
+        newMap.set(uri, imageData);
       }
-      // Add to selection
-      return [...prev, uri];
+
+      return newMap;
     });
   };
 
   const getSelectionNumber = (uri: string): number | null => {
-    const index = selectedImages.indexOf(uri);
+    const selectedUris = Array.from(selectedImagesMap.keys());
+    const index = selectedUris.indexOf(uri);
     return index >= 0 ? index + 1 : null;
   };
 
@@ -235,14 +261,15 @@ export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange
       </TouchableOpacity>
 
       {/* Manually selected photos from gallery picker (shown first) */}
-      {manuallySelectedPhotos.map((uri, index) => {
+      {manuallySelectedPhotos.map((imageData, index) => {
+        const uri = imageData.uri;
         const selectionNumber = getSelectionNumber(uri);
         const isSelected = selectionNumber !== null;
         return (
           <TouchableOpacity
             key={`manual-${index}`}
             style={styles.photoItem}
-            onPress={() => handleToggleImage(uri)}
+            onPress={() => handleToggleImage(imageData)}
             activeOpacity={0.9}
           >
             <Image source={{ uri }} style={styles.photoImage} />
@@ -259,16 +286,21 @@ export default function PhotoGridTab({ visible, onSelectPhoto, onSelectionChange
 
       {/* Photos from camera roll */}
       {photos
-        .filter(photo => !manuallySelectedPhotos.includes(photo.node.image.uri))
+        .filter(photo => !manuallySelectedPhotos.some(img => img.uri === photo.node.image.uri))
         .map((photo, index) => {
           const imageUri = photo.node.image.uri;
+          const imageData: SelectedImageData = {
+            uri: imageUri,
+            fileName: photo.node.image.filename || undefined,
+            type: `image/${photo.node.image.extension || 'jpeg'}`,
+          };
           const selectionNumber = getSelectionNumber(imageUri);
           const isSelected = selectionNumber !== null;
           return (
             <TouchableOpacity
               key={`photo-${index}`}
               style={styles.photoItem}
-              onPress={() => handleToggleImage(imageUri)}
+              onPress={() => handleToggleImage(imageData)}
               activeOpacity={0.9}
             >
               <Image source={{ uri: imageUri }} style={styles.photoImage} />
