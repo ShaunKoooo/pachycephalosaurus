@@ -15,6 +15,7 @@ interface PhotoSelectionModalProps {
   onClose: () => void;
   onSelectPhoto: (uri: string) => void;
   category: string;
+  onSkip?: () => void;
 }
 
 type TabType = 'photos' | 'videos' | 'recent' | 'draft';
@@ -24,6 +25,7 @@ export default function PhotoSelectionModal({
   onClose,
   onSelectPhoto,
   category,
+  onSkip,
 }: PhotoSelectionModalProps) {
   const [selectedTab, setSelectedTab] = useState<TabType>('photos');
 
@@ -35,7 +37,11 @@ export default function PhotoSelectionModal({
   ];
 
   const handleSkip = () => {
-    onClose();
+    if (onSkip) {
+      onSkip();
+    } else {
+      onClose();
+    }
   };
 
   return (
