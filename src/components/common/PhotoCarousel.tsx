@@ -12,6 +12,7 @@ import {
 import { FlashList } from '@shopify/flash-list';
 import { FontelloIcon } from '@/components';
 import { AddDiaryIcon } from '@/components/common/svg';
+import { Colors } from '@/theme';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH;
@@ -37,7 +38,7 @@ export default function PhotoCarousel({
   onAddPhoto,
   onDeletePhoto,
   onCardChange,
-  height = 283,
+  height = 300,
 }: PhotoCarouselProps) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const carouselRef = useRef(null);
@@ -76,16 +77,16 @@ export default function PhotoCarousel({
             <View style={styles.photoCardWrapper}>
               <View style={styles.photoCard}>
                 {item.photoUri ? (
-                  <>
+                  <View style={styles.photoPlaceholder}>
                     <TouchableOpacity
                       style={styles.deleteButton}
                       onPress={handleDeletePhoto}
                       activeOpacity={0.7}
                     >
-                      <FontelloIcon name="ic_delete_24px" size={24} color="#FF3B30" />
+                      <FontelloIcon name="mask" size={24} color="#FF3B30" />
                     </TouchableOpacity>
                     <Image source={{ uri: item.photoUri }} style={styles.photoImage} />
-                  </>
+                  </View>
                 ) : (
                   <View style={styles.photoPlaceholder}>
                     <Text style={styles.photoPlaceholderText}>{item.title}</Text>
@@ -121,8 +122,8 @@ export default function PhotoCarousel({
           ))}
         </View>
         <View style={styles.cardCountContainer}>
-          <FontelloIcon name="ic_insert_invitation_24px" size={20} color="#666666" />
-          <Text style={styles.cardCountText}>{cards[currentCardIndex]?.cardCount || 0} 天卡</Text>
+          <FontelloIcon name="quarter" size={20} color={Colors.primary} />
+          <Text style={styles.cardCountText}>{cards[currentCardIndex]?.cardCount || 0} 大卡</Text>
         </View>
       </View>
     </View>
@@ -131,7 +132,7 @@ export default function PhotoCarousel({
 
 const styles = StyleSheet.create({
   carouselContainer: {
-    marginBottom: 24,
+    marginBottom: 8,
   },
   carouselWrapper: {
     width: SCREEN_WIDTH,
@@ -142,12 +143,10 @@ const styles = StyleSheet.create({
   },
   photoCard: {
     flex: 1,
-    backgroundColor: 'white',
     borderRadius: 8,
-    overflow: 'hidden',
-    height: 283,
+    height: 290,
     width: 283,
-    marginTop: 15,
+    marginTop: 10,
     position: 'relative',
     alignSelf: 'center',
   },
@@ -156,21 +155,36 @@ const styles = StyleSheet.create({
     top: 16,
     right: 16,
     zIndex: 10,
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     borderRadius: 20,
-    padding: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 49,
+    height: 34,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
   photoImage: {
     width: '100%',
-    height: 300,
+    height: 283,
     resizeMode: 'cover',
+    borderRadius: 8,
   },
   photoPlaceholder: {
-    width: '100%',
-    height: 300,
-    backgroundColor: '#F0F0F0',
+    width: 283,
+    height: 283,
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    elevation: 40,
   },
   photoPlaceholderText: {
     fontSize: 18,
@@ -201,8 +215,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 16,
     paddingHorizontal: CARD_HORIZONTAL_MARGIN,
+    marginTop: 8,
   },
   spacer: {
     flex: 1,
@@ -229,7 +243,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16,
