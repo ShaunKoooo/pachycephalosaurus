@@ -1,4 +1,6 @@
 import { Asset } from 'react-native-image-picker';
+import ReactNativeBlobUtil from 'react-native-blob-util';
+import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import type { MediaUploadInfoResponse } from '../store/api/mediaApi';
 
 /**
@@ -27,30 +29,97 @@ export const uploadImageToGCS = async (
   imageAsset: Asset,
 ): Promise<boolean> => {
   try {
+    console.log('[uploadImageToGCS] Starting GCS upload');
+    console.log('[uploadImageToGCS] Image asset:', {
+      uri: imageAsset.uri,
+      type: imageAsset.type,
+      fileName: imageAsset.fileName,
+      fileSize: imageAsset.fileSize,
+    });
+
     if (!imageAsset.uri) {
       throw new Error('Image URI is missing');
     }
 
-    // 準備上傳的資料
-    const formData = new FormData();
-    formData.append('file', {
-      uri: imageAsset.uri,
-      type: imageAsset.type || 'image/jpeg',
-      name: imageAsset.fileName || 'image.jpg',
-    } as any);
+    const filePath = imageAsset.uri;
+    const contentType = imageAsset.type || 'image/jpeg';
 
-    // 上傳到 Google Cloud Storage
-    const response = await fetch(uploadUrl, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': imageAsset.type || 'image/jpeg',
+    console.log('[uploadImageToGCS] File path:', filePath);
+
+    // 如果是 iOS ph:// URI，使用 CameraRoll 取得實際檔案路徑
+    if (filePath.toLowerCase().startsWith('ph://')) {
+      console.log('[uploadImageToGCS] Detected iOS photo library URI, using CameraRoll...');
+
+      // 使用 CameraRoll.iosGetImageDataById 取得實際檔案路徑
+      const imageData = await CameraRoll.iosGetImageDataById(filePath);
+      const realFilePath = imageData?.node?.image?.filepath;
+      console.log('[uploadImageToGCS] Got filepath from CameraRoll:', realFilePath);
+
+      if (!realFilePath) {
+        console.error('[uploadImageToGCS] Unable to get file path from ph:// URI');
+        throw new Error('Unable to get file path from ph:// URI');
+      }
+
+      console.log('[uploadImageToGCS] Real file path:', realFilePath);
+
+      // 移除 file:// 前綴
+      const cleanPath = realFilePath.replace('file://', '');
+
+      // 上傳檔案
+      const response = await ReactNativeBlobUtil.fetch(
+        'PUT',
+        uploadUrl,
+        {
+          'Content-Type': contentType,
+        },
+        ReactNativeBlobUtil.wrap(cleanPath),
+      );
+
+      console.log('[uploadImageToGCS] GCS response status:', response.info().status);
+
+      const success = response.info().status >= 200 && response.info().status < 300;
+
+      if (success) {
+        console.log('[uploadImageToGCS] GCS upload successful!');
+      } else {
+        console.error('[uploadImageToGCS] GCS upload failed:', response.info().status, response.text());
+      }
+
+      return success;
+    }
+
+    // 一般檔案路徑使用 wrap
+    console.log('[uploadImageToGCS] Uploading to GCS using ReactNativeBlobUtil.wrap...');
+
+    // 移除 file:// 前綴
+    const cleanPath = filePath.replace('file://', '');
+
+    const response = await ReactNativeBlobUtil.fetch(
+      'PUT',
+      uploadUrl,
+      {
+        'Content-Type': contentType,
       },
-      body: formData,
-    });
+      ReactNativeBlobUtil.wrap(cleanPath),
+    );
 
-    return response.ok;
+    console.log('[uploadImageToGCS] GCS response status:', response.info().status);
+
+    const success = response.info().status >= 200 && response.info().status < 300;
+
+    if (success) {
+      console.log('[uploadImageToGCS] GCS upload successful!');
+    } else {
+      console.error('[uploadImageToGCS] GCS upload failed:', response.info().status, response.text());
+    }
+
+    return success;
   } catch (error) {
-    console.error('Error uploading image to GCS:', error);
+    console.error('[uploadImageToGCS] Error:', error);
+    if (error instanceof Error) {
+      console.error('[uploadImageToGCS] Error message:', error.message);
+      console.error('[uploadImageToGCS] Error stack:', error.stack);
+    }
     return false;
   }
 };
@@ -69,30 +138,51 @@ export const uploadSingleImage = async (
   }) => Promise<MediaUploadInfoResponse>,
 ): Promise<string | null> => {
   try {
+    console.log('[uploadSingleImage] Starting upload process');
+
     if (!imageAsset.uri) {
-      console.error('Image URI is missing');
+      console.error('[uploadSingleImage] Image URI is missing');
       return null;
     }
+
+    console.log('[uploadSingleImage] Image URI:', imageAsset.uri);
 
     // 1. 取得副檔名和日期
     const extname = getFileExtension(imageAsset.uri);
     const date = formatDateForUpload();
 
+    console.log('[uploadSingleImage] File extension:', extname);
+    console.log('[uploadSingleImage] Date:', date);
+
     // 2. 取得上傳資訊
+    console.log('[uploadSingleImage] Getting upload info from API...');
     const uploadInfo = await getUploadInfo({ extname, date });
 
+    console.log('[uploadSingleImage] Upload info received:', {
+      hasUrl: !!uploadInfo.url,
+      hasCdnUrl: !!uploadInfo.cdn_url,
+      storage: uploadInfo.storage,
+    });
+
     // 3. 上傳圖片到 GCS
+    console.log('[uploadSingleImage] Uploading to GCS...');
     const success = await uploadImageToGCS(uploadInfo.url, imageAsset);
 
     if (!success) {
-      console.error('Failed to upload image to GCS');
+      console.error('[uploadSingleImage] Failed to upload image to GCS');
       return null;
     }
+
+    console.log('[uploadSingleImage] Upload successful! CDN URL:', uploadInfo.cdn_url);
 
     // 4. 返回 CDN URL
     return uploadInfo.cdn_url;
   } catch (error) {
-    console.error('Error in uploadSingleImage:', error);
+    console.error('[uploadSingleImage] Error:', error);
+    if (error instanceof Error) {
+      console.error('[uploadSingleImage] Error message:', error.message);
+      console.error('[uploadSingleImage] Error stack:', error.stack);
+    }
     return null;
   }
 };

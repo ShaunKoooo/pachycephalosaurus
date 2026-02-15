@@ -118,8 +118,13 @@ export default function PhotoSelectionModal({
         onUploadComplete(uploadedUrls);
       }
 
-      // 關閉 Modal
-      onClose();
+      // 如果有 onSkip 表示需要跳到下一步（FoodEntryModal）
+      if (onSkip) {
+        onSkip();
+      } else {
+        // 否則關閉 Modal
+        onClose();
+      }
     } catch (error) {
       console.error('Upload error:', error);
       Alert.alert('上傳失敗', '圖片上傳時發生錯誤，請重試');

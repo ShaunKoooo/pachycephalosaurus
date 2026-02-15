@@ -20,6 +20,7 @@ export default function DiaryScreen() {
   const [showFoodEntryModal, setShowFoodEntryModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedPhotoUri, setSelectedPhotoUri] = useState<string | undefined>();
+  const [uploadedPhotoUrls, setUploadedPhotoUrls] = useState<string[]>([]);
 
   // Update calendar locale when app language changes
   useEffect(() => {
@@ -105,15 +106,23 @@ export default function DiaryScreen() {
   };
 
   const handleSkipPhotoSelection = () => {
+    // 注意：不清空 uploadedPhotoUrls，因為可能已經透過 onUploadComplete 設定了
+    // 只清空 selectedPhotoUri（單選模式的舊邏輯）
     setSelectedPhotoUri(undefined);
     setShowPhotoModal(false);
     setShowFoodEntryModal(true);
+  };
+
+  const handleUploadComplete = (urls: string[]) => {
+    console.log('Upload completed, URLs:', urls);
+    setUploadedPhotoUrls(urls);
   };
 
   const handleFoodEntryModalClose = () => {
     setShowFoodEntryModal(false);
     setSelectedCategory('');
     setSelectedPhotoUri(undefined);
+    setUploadedPhotoUrls([]);
   };
 
   const handleFoodEntryBack = () => {
@@ -190,6 +199,7 @@ export default function DiaryScreen() {
         onClose={handlePhotoModalClose}
         onSelectPhoto={handleSelectPhoto}
         onSkip={handleSkipPhotoSelection}
+        onUploadComplete={handleUploadComplete}
         category={selectedCategory}
       />
 
@@ -203,6 +213,7 @@ export default function DiaryScreen() {
         categoryLabel={getCategoryLabel(selectedCategory)}
         date={formatDateForDisplay(selectedDate)}
         selectedPhotoUri={selectedPhotoUri}
+        uploadedPhotoUrls={uploadedPhotoUrls}
       />
     </View>
   );
